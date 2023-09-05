@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter3_wan_android/http/user.dart';
+import 'package:flutter3_wan_android/http/user2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,6 +71,34 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+
+      const jsonString = '{"name": "Jerry","email": "Jerry@example.com"}';
+
+      // Map<String, dynamic> userMap = jsonDecode(jsonString);
+      final userMap = jsonDecode(jsonString);
+
+      if (kDebugMode) {
+        print('User   $userMap');
+      }
+
+      var user = User.fromJson(userMap);
+      var user2 = User2.fromJson(userMap);
+
+      //jsonEncode(user)
+      if (kDebugMode) {
+        print('User1   ${user.toString()}');
+        print('User1   ${user.toJson()}');
+        print('User1   ${jsonEncode(user)}');
+        print('User1   ${user.name}');
+        print('User1   ${user.email}');
+      }
+      if (kDebugMode) {
+        print('User2   ${user2.toString()}');
+        print('User2   ${user2.toJson()}');
+        print('User1   ${jsonEncode(user2)}');
+        print('User2   ${user2.name}');
+        print('User2   ${user2.email}');
+      }
     });
   }
 
@@ -77,6 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
