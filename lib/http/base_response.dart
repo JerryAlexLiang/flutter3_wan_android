@@ -37,19 +37,30 @@ class BaseResponse<T> {
 
   /// 从映射创建新BaseResponse实例所需的工厂构造函数。将映射传递给生成的' _BaseResponseFromJson() '构造函数。
   /// 构造函数以源类命名，在本例中为BaseResponse。
-  // factory BaseResponse.fromJson(Map<String,dynamic> json) =>
-  //     _$BaseResponseFromJson(json);
+  factory BaseResponse.fromJson(
+          Map<String, dynamic> json, T Function(dynamic json) fromJsonT) =>
+      _$BaseResponseFromJson<T>(json, fromJsonT);
 
-// factory BaseResponse.fromJson(Map<String, dynamic> json) =>
-//     _$BaseResponseFromJson(json);
+  /// ' toJson '是类声明支持序列化为JSON的约定。该实现仅仅调用私有的、生成的助手方法' _BaseResponseToJson '。
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
+      _$BaseResponseToJson<T>(this, toJsonT);
+}
 
-//factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+/// 一个注释，用于代码生成器，使其知道该类需要生成JSON序列化逻辑
+@JsonSerializable(genericArgumentFactories: true)
+class BaseList<T> {
+  List<T> datas;
 
+  BaseList(this.datas);
 
+  factory BaseList.fromJson(
+    Map<String, dynamic> json,
+    T Function(dynamic json) fromJsonT,
+  ) =>
+      _$BaseListFromJson<T>(json, fromJsonT);
 
-//  /// ' toJson '是类声明支持序列化为JSON的约定。该实现仅仅调用私有的、生成的助手方法' _BaseResponseToJson '。
-// Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
-//Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
+      _$BaseListToJson<T>(this, toJsonT);
 }
 
 class BaseResponseCode {

@@ -39,3 +39,19 @@ Object? _$nullableGenericToJson<T>(
   Object? Function(T value) toJson,
 ) =>
     input == null ? null : toJson(input);
+
+BaseList<T> _$BaseListFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    BaseList<T>(
+      (json['datas'] as List<dynamic>).map(fromJsonT).toList(),
+    );
+
+Map<String, dynamic> _$BaseListToJson<T>(
+  BaseList<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'datas': instance.datas.map(toJsonT).toList(),
+    };
