@@ -4,9 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/http/base_response.dart';
-import 'package:flutter3_wan_android/model/user.dart';
-import 'package:flutter3_wan_android/model/user2.dart';
-import 'package:flutter3_wan_android/model/user_list.dart';
+
+import 'model/user.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,54 +74,54 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
 
-      const jsonString = '{"name": "Jerry","email": "Jerry@example.com"}';
-
-      // jsonDecode 解码:解析字符串并返回结果Json对象
-      Map<String, dynamic> userMap = jsonDecode(jsonString);
-      // final userMap = jsonDecode(jsonString);
-
-      if (kDebugMode) {
-        print('\n =====================解析对象开始============================ \n ');
-        // User jsonDecode  {name: Jerry, email: Jerry@example.com}
-        print('User jsonDecode  $userMap');
-      }
-
-      var user = User.fromJson(userMap);
-      var user2 = User2.fromJson(userMap);
-
-      //jsonEncode(user)
-      if (kDebugMode) {
-        // User1 :  Instance of 'User'
-        print('User1 :  $user');
-        // User1 toString :  Instance of 'User'
-        print('User1 toString :  ${user.toString()}');
-        // User1 toJson :  {name: Jerry, email: Jerry@example.com}
-        print('User1 toJson :  ${user.toJson()}');
-        // User1 jsonEncode :  {"name":"Jerry","email":"Jerry@example.com"}
-        print('User1 jsonEncode :  ${jsonEncode(user)}');
-        // User1 name :  Jerry
-        print('User1 name :  ${user.name}');
-        // User1 email :  Jerry@example.com
-        print('User1 email :  ${user.email}');
-      }
-      if (kDebugMode) {
-        // User2 :  Instance of 'User2'
-        print('User2 :  $user2');
-        // User2 toString :   Instance of 'User2'
-        print('User2 toString :   ${user2.toString()}');
-        // User2 toJson :  {name: Jerry, email: Jerry@example.com}
-        print('User2 toJson :  ${user2.toJson()}');
-        // User2 jsonEncode :  {"name":"Jerry","email":"Jerry@example.com"}
-        print('User2 jsonEncode :  ${jsonEncode(user2)}');
-        // User2 name :  Jerry
-        print('User2 name :  ${user2.name}');
-        // User2 email :  Jerry@example.com
-        print('User2 email :  ${user2.email}');
-      }
-
-      if (kDebugMode) {
-        print('\n =====================解析对象结束============================ \n ');
-      }
+      //   const jsonString = '{"name": "Jerry","email": "Jerry@example.com"}';
+      //
+      //   // jsonDecode 解码:解析字符串并返回结果Json对象
+      //   Map<String, dynamic> userMap = jsonDecode(jsonString);
+      //   // final userMap = jsonDecode(jsonString);
+      //
+      //   if (kDebugMode) {
+      //     print('\n =====================解析对象开始============================ \n ');
+      //     // User jsonDecode  {name: Jerry, email: Jerry@example.com}
+      //     print('User jsonDecode  $userMap');
+      //   }
+      //
+      //   var user = User.fromJson(userMap);
+      //   var user2 = User2.fromJson(userMap);
+      //
+      //   //jsonEncode(user)
+      //   if (kDebugMode) {
+      //     // User1 :  Instance of 'User'
+      //     print('User1 :  $user');
+      //     // User1 toString :  Instance of 'User'
+      //     print('User1 toString :  ${user.toString()}');
+      //     // User1 toJson :  {name: Jerry, email: Jerry@example.com}
+      //     print('User1 toJson :  ${user.toJson()}');
+      //     // User1 jsonEncode :  {"name":"Jerry","email":"Jerry@example.com"}
+      //     print('User1 jsonEncode :  ${jsonEncode(user)}');
+      //     // User1 name :  Jerry
+      //     print('User1 name :  ${user.name}');
+      //     // User1 email :  Jerry@example.com
+      //     print('User1 email :  ${user.email}');
+      //   }
+      //   if (kDebugMode) {
+      //     // User2 :  Instance of 'User2'
+      //     print('User2 :  $user2');
+      //     // User2 toString :   Instance of 'User2'
+      //     print('User2 toString :   ${user2.toString()}');
+      //     // User2 toJson :  {name: Jerry, email: Jerry@example.com}
+      //     print('User2 toJson :  ${user2.toJson()}');
+      //     // User2 jsonEncode :  {"name":"Jerry","email":"Jerry@example.com"}
+      //     print('User2 jsonEncode :  ${jsonEncode(user2)}');
+      //     // User2 name :  Jerry
+      //     print('User2 name :  ${user2.name}');
+      //     // User2 email :  Jerry@example.com
+      //     print('User2 email :  ${user2.email}');
+      //   }
+      //
+      //   if (kDebugMode) {
+      //     print('\n =====================解析对象结束============================ \n ');
+      //   }
     });
 
     decodeAssetJson();
@@ -133,143 +132,251 @@ class _MyHomePageState extends State<MyHomePage> {
     Map<String, dynamic> userListMap =
         await loadJsonAssets("assets/user_list.json");
 
-    if (kDebugMode) {
-      print('\n =======================解析数组开始========================== \n ');
-      // userListMap : {code: 0, message: Success, users: [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]}
-      print('userListMap  : $userListMap');
-      // userListMap toString : {code: 0, message: Success, users: [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]}
-      print('userListMap toString : ${userListMap.toString()}');
-      // userListMap jsonEncode :  {"code":0,"message":"Success","users":[{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]}
-      print('userListMap jsonEncode :  ${jsonEncode(userListMap)}');
-    }
+    // if (kDebugMode) {
+    //   print('\n =======================解析数组开始========================== \n ');
+    //   // userListMap : {code: 0, message: Success, users: [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]}
+    //   print('userListMap  : $userListMap');
+    //   // userListMap toString : {code: 0, message: Success, users: [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]}
+    //   print('userListMap toString : ${userListMap.toString()}');
+    //   // userListMap jsonEncode :  {"code":0,"message":"Success","users":[{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]}
+    //   print('userListMap jsonEncode :  ${jsonEncode(userListMap)}');
+    // }
 
-    // 方法1 : 整个JSON串解析成Model对象
-    var userList = UserList.fromJson(userListMap);
+    // // 方法1 : 整个JSON串解析成Model对象
+    // var userListBean = UserList.fromJson(userListMap);
+    //
+    // if (kDebugMode) {
+    //   print('\n =======================解析数组开始1========================== \n ');
+    //   // UserList toString : Instance of 'UserList'
+    //   print('UserList toString : ${userListBean.toString()}');
+    //   // UserList toJson : {code: 0, message: Success, users: [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]}
+    //   print('UserList toJson : ${userListBean.toJson()}');
+    //
+    //   var users = userListBean.data;
+    //
+    //   if (users.isNotEmpty) {
+    //     for (int i = 0; i < (users.length); i++) {
+    //       // UserList  : => 0   [Instance of 'User', Instance of 'User', Instance of 'User']
+    //       // UserList  : => 1   [Instance of 'User', Instance of 'User', Instance of 'User']
+    //       // UserList  : => 2   [Instance of 'User', Instance of 'User', Instance of 'User']
+    //       print('UserList  : => $i   $users');
+    //       // UserList toString : => 0   Instance of 'User'
+    //       // UserList toString : => 1   Instance of 'User'
+    //       // UserList toString : => 2   Instance of 'User'
+    //       print('UserList toString : => $i   ${users[i].toString()}');
+    //       // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
+    //       // UserList toJson : => 1   {name: Alex, email: Alex@example.com}
+    //       // UserList toJson : => 2   {name: Tom, email: Tom@example.com}
+    //       print('UserList toJson : => $i   ${users[i].toJson()}');
+    //       // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
+    //       // UserList jsonEncode : => 1   {"name":"Alex","email":"Alex@example.com"}
+    //       // UserList jsonEncode : => 2   {"name":"Tom","email":"Tom@example.com"}
+    //       print('UserList jsonEncode : => $i   ${jsonEncode(users[i])}');
+    //       // UserList name : => 0   Jerry
+    //       // UserList name : => 1   Alex
+    //       // UserList name : => 2   Tom
+    //       print('UserList name : => $i   ${users[i].name}');
+    //       // UserList email : => 0   Jerry@example.com
+    //       // UserList email : => 1   Alex@example.com
+    //       // UserList email : => 2   Tom@example.com
+    //       print('UserList email : => $i   ${users[i].email}');
+    //     }
+    //   }
+    //   print('\n =======================解析数组结束1========================== \n ');
+    // }
 
-    if (kDebugMode) {
-      print('\n =======================解析数组开始1========================== \n ');
-      // UserList toString : Instance of 'UserList'
-      print('UserList toString : ${userList.toString()}');
-      // UserList toJson : {code: 0, message: Success, users: [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]}
-      print('UserList toJson : ${userList.toJson()}');
-
-      var users = userList.data;
-
-      if (users.isNotEmpty) {
-        for (int i = 0; i < (users.length); i++) {
-          // UserList  : => 0   [Instance of 'User', Instance of 'User', Instance of 'User']
-          // UserList  : => 1   [Instance of 'User', Instance of 'User', Instance of 'User']
-          // UserList  : => 2   [Instance of 'User', Instance of 'User', Instance of 'User']
-          print('UserList  : => $i   $users');
-          // UserList toString : => 0   Instance of 'User'
-          // UserList toString : => 1   Instance of 'User'
-          // UserList toString : => 2   Instance of 'User'
-          print('UserList toString : => $i   ${users[i].toString()}');
-          // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
-          // UserList toJson : => 1   {name: Alex, email: Alex@example.com}
-          // UserList toJson : => 2   {name: Tom, email: Tom@example.com}
-          print('UserList toJson : => $i   ${users[i].toJson()}');
-          // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
-          // UserList jsonEncode : => 1   {"name":"Alex","email":"Alex@example.com"}
-          // UserList jsonEncode : => 2   {"name":"Tom","email":"Tom@example.com"}
-          print('UserList jsonEncode : => $i   ${jsonEncode(users[i])}');
-          // UserList name : => 0   Jerry
-          // UserList name : => 1   Alex
-          // UserList name : => 2   Tom
-          print('UserList name : => $i   ${users[i].name}');
-          // UserList email : => 0   Jerry@example.com
-          // UserList email : => 1   Alex@example.com
-          // UserList email : => 2   Tom@example.com
-          print('UserList email : => $i   ${users[i].email}');
-        }
-      }
-      print('\n =======================解析数组结束1========================== \n ');
-    }
-
-    // 方法2: 只获取返回对象中的List数组
-    if (kDebugMode) {
-      var usersMap = userListMap["data"];
-      print('\n =======================解析数组开始2========================== \n ');
-      // usersMap :  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
-      print('usersMap :  $usersMap');
-      // usersMap toString:  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
-      print('usersMap toString:  ${usersMap.toString()}');
-
-      // jsonEncode转换字符串
-      String userMapJson = jsonEncode(usersMap);
-
-      // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
-      print('userMapJson jsonEncode:  $userMapJson');
-
-      // 列表转换时一定要加一下强转List<dynamic>，否则会报错
-      var list = usersMap.map((e) => User.fromJson(e)).toList();
-
-      // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list :  $list');
-      // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list toString:  ${list.toString()}');
-
-      if (list.isNotEmpty) {
-        for (int i = 0; i < (list.length); i++) {
-          // UserList : => 0   Instance of 'User'
-          print('UserList  : => $i   ${list[i].toString()}');
-          // UserList toString : => 0   Instance of 'User'
-          print('UserList toString : => $i   ${list[i].toString()}');
-          // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
-          print('UserList toJson : => $i   ${list[i].toJson()}');
-          // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
-          print('UserList jsonEncode : => $i   ${jsonEncode(list[i])}');
-          // UserList name : => 0   Jerry
-          print('UserList name : => $i   ${list[i].name}');
-          // UserList email : => 0   Jerry@example.com
-          print('UserList email : => $i   ${list[i].email}');
-        }
-      }
-      print('\n =======================解析数组结束2========================== \n ');
-    }
+    // // 方法2: 只获取返回对象中的List数组
+    // if (kDebugMode) {
+    //   var usersMap = userListMap["data"];
+    //   print('\n =======================解析数组开始2========================== \n ');
+    //   // usersMap :  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
+    //   print('usersMap :  $usersMap');
+    //   // usersMap toString:  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
+    //   print('usersMap toString:  ${usersMap.toString()}');
+    //
+    //   // jsonEncode转换字符串
+    //   String userMapJson = jsonEncode(usersMap);
+    //
+    //   // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
+    //   print('userMapJson jsonEncode:  $userMapJson');
+    //
+    //   // 列表转换时一定要加一下强转List<dynamic>，否则会报错
+    //   var list = usersMap.map((e) => User.fromJson(e)).toList();
+    //
+    //   // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list :  $list');
+    //   // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list toString:  ${list.toString()}');
+    //   print('UserList-list jsonEncode:  ${jsonEncode(list)}');
+    //
+    //   if (list.isNotEmpty) {
+    //     for (int i = 0; i < (list.length); i++) {
+    //       // UserList : => 0   Instance of 'User'
+    //       print('UserList  : => $i   ${list[i].toString()}');
+    //       // UserList toString : => 0   Instance of 'User'
+    //       print('UserList toString : => $i   ${list[i].toString()}');
+    //       // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
+    //       print('UserList toJson : => $i   ${list[i].toJson()}');
+    //       // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
+    //       print('UserList jsonEncode : => $i   ${jsonEncode(list[i])}');
+    //       // UserList name : => 0   Jerry
+    //       print('UserList name : => $i   ${list[i].name}');
+    //       // UserList email : => 0   Jerry@example.com
+    //       print('UserList email : => $i   ${list[i].email}');
+    //     }
+    //   }
+    //   print('\n =======================解析数组结束2========================== \n ');
+    // }
 
     // 方法3: 使用泛型
 
-    // 解析本地数据-List数组
+    // 数据类型1 解析本地数据-List数组
     // 硬编码String-JSON字符串
     // String jsonStr =
     //     '{"code":0,"message":"Success","data":[{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]}';
     // Map<String, dynamic> jsonMap = jsonDecode(jsonStr);
 
-    // 方法1-BaseResponse<T> 泛型 - 在一般情况下 data 是一个数组
-    // 列表转换时一定要加一下强转List<dynamic>，否则会报错
-    BaseResponse<List<User>> userListMap2 = BaseResponse.fromJson(
-        userListMap,
-        (json) => (json as List<dynamic>)
-            // .map((e) => User.fromJson(e as Map<String, dynamic>))
-            .map((e) => User.fromJson(e))
-            .toList());
+    // // 方法1-BaseResponse<T> 泛型 - 在一般情况下 data 是一个数组
+    // // 列表转换时一定要加一下强转List<dynamic>，否则会报错:type 'List<dynamic>' is not a subtype of type 'List<User>'
+    // BaseResponse<List<User>> userListMap2 = BaseResponse.fromJson(
+    //     userListMap,
+    //     (json) => (json as List<dynamic>)
+    //         // .map((e) => User.fromJson(e as Map<String, dynamic>))
+    //         .map((e) => User.fromJson(e))
+    //         .toList());
+    //
+    // var usersMap = userListMap2.data;
+    //
+    // if (kDebugMode) {
+    //   print('\n =======================使用泛型解析开始========================== \n ');
+    //   //  userListMap2  : Instance of 'BaseResponse<List<User>>'
+    //   print('userListMap2*  : $userListMap2');
+    //   print('userListMap2* message : ${userListMap2.message}');
+    //   print('userListMap2* code : ${userListMap2.code}');
+    //   print('userListMap2* data : ${userListMap2.data}');
+    //   // userListMap2 toString : Instance of 'BaseResponse<List<User>>'
+    //   print('userListMap2* toString : ${userListMap2.toString()}');
+    // }
 
-    var usersMap = userListMap2.data;
+    // if (kDebugMode) {
+    //   print(
+    //       '\n =======================解析数组开始3========================== \n ');
+    //   // usersMap :  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
+    //   print('usersMap :  $usersMap');
+    //   // usersMap toString:  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
+    //   print('usersMap toString:  ${usersMap.toString()}');
+    //
+    //   // jsonEncode转换字符串
+    //   String userMapJson = jsonEncode(usersMap);
+    //
+    //   // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
+    //   print('userMapJson jsonEncode:  $userMapJson');
+    //
+    //   List<User>? list = userListMap2.data;
+    //
+    //   // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list :  $list');
+    //   // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list toString:  ${list.toString()}');
+    //   print('UserList-list jsonEncode:  ${jsonEncode(list)}');
+    //
+    //   if (list != null && list.isNotEmpty) {
+    //     for (int i = 0; i < (list.length); i++) {
+    //       // UserList : => 0   Instance of 'User'
+    //       print('UserList  : => $i   ${list[i].toString()}');
+    //       // UserList toString : => 0   Instance of 'User'
+    //       print('UserList toString : => $i   ${list[i].toString()}');
+    //       // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
+    //       print('UserList toJson : => $i   ${list[i].toJson()}');
+    //       // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
+    //       print('UserList jsonEncode : => $i   ${jsonEncode(list[i])}');
+    //       // UserList name : => 0   Jerry
+    //       print('UserList name : => $i   ${list[i].name}');
+    //       // UserList email : => 0   Jerry@example.com
+    //       print('UserList email : => $i   ${list[i].email}');
+    //     }
+    //   }
+    //   print(
+    //       '\n =======================解析数组结束3========================== \n ');
+    // }
 
-    // 方法2-BaseResponse<T> + BaseList<T>  - 在分页相关接口，data 是一个对象
+    // 数据类型2-BaseResponse<T> + BaseList<T>  - 在分页相关接口，data 是一个对象
+    // 解析方法1-生成data对应的Bean：user_page_bean.dart，然后结合base_response.dart
     // 解析本地数据-List数组
     Map<String, dynamic> json2Map =
         await loadJsonAssets("assets/user_list2.json");
-    // String json2 = '{"data":{"curPage":1,"datas":[{"name":"肖战","email":"肖战@example.com"},{"name":"丁程鑫","email":"丁程鑫@example.com"},{"name":"贺峻霖","email":"贺峻霖@example.com"},{"name":"李天泽","email":"李天泽@example.com"},{"name":"刘耀文","email":"刘耀文@example.com"},{"name":"成毅","email":"成毅@example.com"}],"offset":0,"over":false,"pageCount":3,"size":20,"total":46},"errorCode":0,"errorMsg":""}';
-    // var json2Map = jsonDecode(json2);
+    String jsonString =
+        '{"data":{"curPage":1,"datas":[{"name":"肖战","email":"肖战@example.com"},{"name":"丁程鑫","email":"丁程鑫@example.com"},{"name":"贺峻霖","email":"贺峻霖@example.com"},{"name":"李天泽","email":"李天泽@example.com"},{"name":"刘耀文","email":"刘耀文@example.com"},{"name":"成毅","email":"成毅@example.com"}],"offset":0,"over":false,"pageCount":3,"size":20,"total":46},"code":0,"message":"Success"}';
+    // var json2 = jsonDecode(jsonString);
+    // var json2Encode = jsonEncode(jsonString);
+
+    var json2Encode = jsonEncode(json2Map);
+
+    // BaseResponse<UserPageBean> userListMap3 =
+    //     BaseResponse.fromJson(json2Map, (json) => UserPageBean.fromJson(json));
+    //
+    // var datas = userListMap3.data?.datas;
+    //
+    // if (kDebugMode) {
+    //   print('\n =======================使用泛型解析开始========================== \n ');
+    //   print('json2*  : $json2Map');
+    //   print('json2Encode*  : $json2Encode');
+    //   print('userListMap3*  : $userListMap3');
+    //   print('userListMap3* toString : ${userListMap3.toString()}');
+    //   print('userListMap3* message : ${userListMap3.message}');
+    //   print('userListMap3* code : ${userListMap3.code}');
+    //   print('userListMap3* data : ${userListMap3.data}');
+    //   print('userListMap3* datas jsonEncode: ${jsonEncode(datas)}');
+    //
+    //   print('\n ====================================================== \n ');
+    //   print('usersMap2*  : $datas');
+    //   print('usersMap2* toString : ${datas.toString()}');
+    //   print('usersMap2* toList : ${datas?.toList()}');
+    // }
+    //
+    // if (kDebugMode) {
+    //   print('\n =======================解析数组开始4========================== \n ');
+    //
+    //   // jsonEncode转换字符串
+    //   String userMapJson2 = jsonEncode(datas);
+    //
+    //   // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
+    //   print('userMapJson2 jsonEncode:  $userMapJson2');
+    //
+    //   // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list :  $datas');
+    //   // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list toString:  ${datas.toString()}');
+    //
+    //   if (datas != null && datas.isNotEmpty) {
+    //     for (int i = 0; i < (datas.length); i++) {
+    //       // UserList : => 0   Instance of 'User'
+    //       print('UserList2  : => $i   ${datas[i].toString()}');
+    //       // UserList toString : => 0   Instance of 'User'
+    //       print('UserList2 toString : => $i   ${datas[i].toString()}');
+    //       // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
+    //       print('UserList2 toJson : => $i   ${datas[i].toJson()}');
+    //       // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
+    //       print('UserList2 jsonEncode : => $i   ${jsonEncode(datas[i])}');
+    //       // UserList name : => 0   Jerry
+    //       print('UserList2 name : => $i   ${datas[i].name}');
+    //       // UserList email : => 0   Jerry@example.com
+    //       print('UserList2 email : => $i   ${datas[i].email}');
+    //     }
+    //   }
+    //   print('\n =======================解析数组结束4========================== \n ');
+    //   print('\n =======================使用泛型解析结束========================== \n ');
+    // }
 
     BaseResponse<BaseList<User>> userListMap3 = BaseResponse.fromJson(json2Map,
         (json) => BaseList.fromJson(json, (json) => User.fromJson(json)));
 
     BaseList<User>? baseUsers = userListMap3.data;
     // var datas = baseUsers?.datas;
-    List<User>? usersMap2 = baseUsers?.datas;
+    List<User>? usersMap3 = baseUsers?.datas;
 
     if (kDebugMode) {
       print('\n =======================使用泛型解析开始========================== \n ');
-      //  userListMap2  : Instance of 'BaseResponse<List<User>>'
-      print('userListMap2*  : $userListMap2');
-      print('userListMap2* message : ${userListMap2.message}');
-      print('userListMap2* code : ${userListMap2.code}');
-      print('userListMap2* data : ${userListMap2.data}');
-      // userListMap2 toString : Instance of 'BaseResponse<List<User>>'
-      print('userListMap2* toString : ${userListMap2.toString()}');
 
       print('\n ====================================================== \n ');
       print('userListMap3*  : $userListMap3');
@@ -283,84 +390,43 @@ class _MyHomePageState extends State<MyHomePage> {
       print('baseUsers* datas : ${baseUsers?.datas}');
 
       print('\n ====================================================== \n ');
-      print('usersMap2*  : $usersMap2');
-      print('usersMap2* toString : ${usersMap2.toString()}');
-      print('usersMap2* toList : ${usersMap2?.toList()}');
-
+      print('usersMap3*  : $usersMap3');
+      print('usersMap3* toString : ${usersMap3.toString()}');
+      print('usersMap3* toList : ${usersMap3?.toList()}');
     }
 
     if (kDebugMode) {
-      print('\n =======================解析数组开始3========================== \n ');
-      // usersMap :  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
-      print('usersMap :  $usersMap');
-      // usersMap toString:  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
-      print('usersMap toString:  ${usersMap.toString()}');
+      print('\n =======================解析数组开始5========================== \n ');
 
       // jsonEncode转换字符串
-      String userMapJson = jsonEncode(usersMap);
+      String userMapJson3 = jsonEncode(usersMap3);
 
       // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
-      print('userMapJson jsonEncode:  $userMapJson');
-
-      List<User>? list = userListMap2.data;
+      print('userMapJson3 jsonEncode:  $userMapJson3');
 
       // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list :  $list');
+      print('UserList-list :  $usersMap3');
       // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list toString:  ${list.toString()}');
+      print('UserList-list toString:  ${usersMap3.toString()}');
 
-      if (list != null && list.isNotEmpty) {
-        for (int i = 0; i < (list.length); i++) {
+      if (usersMap3 != null && usersMap3.isNotEmpty) {
+        for (int i = 0; i < (usersMap3.length); i++) {
           // UserList : => 0   Instance of 'User'
-          print('UserList  : => $i   ${list[i].toString()}');
+          print('UserList3  : => $i   ${usersMap3[i].toString()}');
           // UserList toString : => 0   Instance of 'User'
-          print('UserList toString : => $i   ${list[i].toString()}');
+          print('UserList3 toString : => $i   ${usersMap3[i].toString()}');
           // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
-          print('UserList toJson : => $i   ${list[i].toJson()}');
+          print('UserList3 toJson : => $i   ${usersMap3[i].toJson()}');
           // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
-          print('UserList jsonEncode : => $i   ${jsonEncode(list[i])}');
+          print('UserList3 jsonEncode : => $i   ${jsonEncode(usersMap3[i])}');
           // UserList name : => 0   Jerry
-          print('UserList name : => $i   ${list[i].name}');
+          print('UserList3 name : => $i   ${usersMap3[i].name}');
           // UserList email : => 0   Jerry@example.com
-          print('UserList email : => $i   ${list[i].email}');
+          print('UserList3 email : => $i   ${usersMap3[i].email}');
         }
       }
-      print('\n =======================解析数组结束3========================== \n ');
-
-      print('\n =======================解析数组开始4========================== \n ');
-      // usersMap :  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
-      print('usersMap2 :  $usersMap2');
-      // usersMap toString:  [{name: Jerry, email: Jerry@example.com}, {name: Alex, email: Alex@example.com}, {name: Tom, email: Tom@example.com}]
-      print('usersMap2 toString:  ${usersMap2.toString()}');
-
-      // jsonEncode转换字符串
-      String userMapJson2 = jsonEncode(usersMap2);
-
-      // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
-      print('userMapJson2 jsonEncode:  $userMapJson2');
-
-      // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list :  $usersMap2');
-      // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list toString:  ${usersMap2.toString()}');
-
-      if (usersMap2 != null && usersMap2.isNotEmpty) {
-        for (int i = 0; i < (usersMap2.length); i++) {
-          // UserList : => 0   Instance of 'User'
-          print('UserList2  : => $i   ${usersMap2[i].toString()}');
-          // UserList toString : => 0   Instance of 'User'
-          print('UserList2 toString : => $i   ${usersMap2[i].toString()}');
-          // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
-          print('UserList2 toJson : => $i   ${usersMap2[i].toJson()}');
-          // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
-          print('UserList2 jsonEncode : => $i   ${jsonEncode(usersMap2[i])}');
-          // UserList name : => 0   Jerry
-          print('UserList2 name : => $i   ${usersMap2[i].name}');
-          // UserList email : => 0   Jerry@example.com
-          print('UserList2 email : => $i   ${usersMap2[i].email}');
-        }
-      }
-      print('\n =======================解析数组结束4========================== \n ');
+      print('\n =======================解析数组结束5========================== \n ');
+      print('\n =======================使用泛型解析结束========================== \n ');
     }
   }
 
