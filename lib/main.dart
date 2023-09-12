@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter3_wan_android/http/base_list_response.dart';
+import 'package:flutter3_wan_android/http/base_page_list_response.dart';
 import 'package:flutter3_wan_android/http/base_response.dart';
+import 'package:flutter3_wan_android/http/page_list.dart';
 
 import 'model/user.dart';
 
@@ -368,65 +371,118 @@ class _MyHomePageState extends State<MyHomePage> {
     //   print('\n =======================使用泛型解析结束========================== \n ');
     // }
 
-    BaseResponse<BaseList<User>> userListMap3 = BaseResponse.fromJson(json2Map,
-        (json) => BaseList.fromJson(json, (json) => User.fromJson(json)));
+    // BaseResponse<BaseList<User>> userListMap3 = BaseResponse.fromJson(json2Map,
+    //     (json) => BaseList.fromJson(json, (json) => User.fromJson(json)));
+    //
+    // BaseList<User>? baseUsers = userListMap3.data;
+    // // var datas = baseUsers?.datas;
+    // List<User>? usersMap3 = baseUsers?.datas;
 
-    BaseList<User>? baseUsers = userListMap3.data;
-    // var datas = baseUsers?.datas;
-    List<User>? usersMap3 = baseUsers?.datas;
+    // if (kDebugMode) {
+    //   print('\n =======================使用泛型解析开始========================== \n ');
+    //
+    //   print('\n ====================================================== \n ');
+    //   print('userListMap3*  : $userListMap3');
+    //   print('userListMap3* message : ${userListMap3.message}');
+    //   print('userListMap3* code : ${userListMap3.code}');
+    //   print('userListMap3* data : ${userListMap3.data}');
+    //   print('userListMap3* toString : ${userListMap3.toString()}');
+    //
+    //   print('\n ====================================================== \n ');
+    //   print('baseUsers*  : $baseUsers');
+    //   print('baseUsers* datas : ${baseUsers?.datas}');
+    //
+    //   print('\n ====================================================== \n ');
+    //   print('usersMap3*  : $usersMap3');
+    //   print('usersMap3* toString : ${usersMap3.toString()}');
+    //   print('usersMap3* toList : ${usersMap3?.toList()}');
+    // }
+    //
+    // if (kDebugMode) {
+    //   print('\n =======================解析数组开始5========================== \n ');
+    //
+    //   // jsonEncode转换字符串
+    //   String userMapJson3 = jsonEncode(usersMap3);
+    //
+    //   // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
+    //   print('userMapJson3 jsonEncode:  $userMapJson3');
+    //
+    //   // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list :  $usersMap3');
+    //   // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
+    //   print('UserList-list toString:  ${usersMap3.toString()}');
+    //
+    //   if (usersMap3 != null && usersMap3.isNotEmpty) {
+    //     for (int i = 0; i < (usersMap3.length); i++) {
+    //       // UserList : => 0   Instance of 'User'
+    //       print('UserList3  : => $i   ${usersMap3[i].toString()}');
+    //       // UserList toString : => 0   Instance of 'User'
+    //       print('UserList3 toString : => $i   ${usersMap3[i].toString()}');
+    //       // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
+    //       print('UserList3 toJson : => $i   ${usersMap3[i].toJson()}');
+    //       // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
+    //       print('UserList3 jsonEncode : => $i   ${jsonEncode(usersMap3[i])}');
+    //       // UserList name : => 0   Jerry
+    //       print('UserList3 name : => $i   ${usersMap3[i].name}');
+    //       // UserList email : => 0   Jerry@example.com
+    //       print('UserList3 email : => $i   ${usersMap3[i].email}');
+    //     }
+    //   }
+    //   print('\n =======================解析数组结束5========================== \n ');
+    //   print('\n =======================使用泛型解析结束========================== \n ');
+    // }
+
+    // // 使用泛型基类BaseListResponse<T>去解析返回List数组类型的JOSN数据
+    // BaseListResponse<User> result =
+    //     BaseListResponse.fromJson(userListMap, (json) => User.fromJson(json));
+    //
+    // List<User> list = result.data;
+    //
+    // if (kDebugMode) {
+    //   print('\n ===============BaseListResponse解析数组开始================== \n ');
+    //
+    //   print('result : $result');
+    //   print('result toString : ${result.toString()}');
+    //
+    //   if (list.isNotEmpty) {
+    //     for (int i = 0; i < (list.length); i++) {
+    //       print('result list $i : ${list[i].name}');
+    //       print('result list $i : ${list[i].email}');
+    //     }
+    //   }
+    //
+    //   print('\n ===============BaseListResponse解析数组结束================== \n ');
+    // }
+
+    // 使用泛型基类BasePageListResponse<T> + PageList<T>去解析返回分页List数组类型的JOSN数据
+    BasePageListResponse<User> result2 =
+        BasePageListResponse.fromJson(json2Map, (json) => User.fromJson(json));
+
+    // PageList<User> data = result2.data;
+    var data = result2.data;
+    // List<User> list2 = data.datas;
+    var list2 = data.datas;
 
     if (kDebugMode) {
-      print('\n =======================使用泛型解析开始========================== \n ');
+      print('\n ===============BasePageListResponse解析数组开始================== \n ');
 
-      print('\n ====================================================== \n ');
-      print('userListMap3*  : $userListMap3');
-      print('userListMap3* message : ${userListMap3.message}');
-      print('userListMap3* code : ${userListMap3.code}');
-      print('userListMap3* data : ${userListMap3.data}');
-      print('userListMap3* toString : ${userListMap3.toString()}');
+      print('result : $result2');
+      print('result toString : ${result2.toString()}');
+      print('result code : ${result2.code}');
+      print('result message : ${result2.message}');
+      print('result data : ${result2.data}');
+      print('result datas : ${result2.data.datas}');
+      print('result data curPage: ${result2.data.curPage}');
+      print('result datas jsonEncode: ${jsonEncode(result2.data.datas)}');
 
-      print('\n ====================================================== \n ');
-      print('baseUsers*  : $baseUsers');
-      print('baseUsers* datas : ${baseUsers?.datas}');
-
-      print('\n ====================================================== \n ');
-      print('usersMap3*  : $usersMap3');
-      print('usersMap3* toString : ${usersMap3.toString()}');
-      print('usersMap3* toList : ${usersMap3?.toList()}');
-    }
-
-    if (kDebugMode) {
-      print('\n =======================解析数组开始5========================== \n ');
-
-      // jsonEncode转换字符串
-      String userMapJson3 = jsonEncode(usersMap3);
-
-      // userMapJson jsonEncode:  [{"name":"Jerry","email":"Jerry@example.com"},{"name":"Alex","email":"Alex@example.com"},{"name":"Tom","email":"Tom@example.com"}]
-      print('userMapJson3 jsonEncode:  $userMapJson3');
-
-      // UserList-list :  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list :  $usersMap3');
-      // UserList-list toString:  [Instance of 'User', Instance of 'User', Instance of 'User']
-      print('UserList-list toString:  ${usersMap3.toString()}');
-
-      if (usersMap3 != null && usersMap3.isNotEmpty) {
-        for (int i = 0; i < (usersMap3.length); i++) {
-          // UserList : => 0   Instance of 'User'
-          print('UserList3  : => $i   ${usersMap3[i].toString()}');
-          // UserList toString : => 0   Instance of 'User'
-          print('UserList3 toString : => $i   ${usersMap3[i].toString()}');
-          // UserList toJson : => 0   {name: Jerry, email: Jerry@example.com}
-          print('UserList3 toJson : => $i   ${usersMap3[i].toJson()}');
-          // UserList jsonEncode : => 0   {"name":"Jerry","email":"Jerry@example.com"}
-          print('UserList3 jsonEncode : => $i   ${jsonEncode(usersMap3[i])}');
-          // UserList name : => 0   Jerry
-          print('UserList3 name : => $i   ${usersMap3[i].name}');
-          // UserList email : => 0   Jerry@example.com
-          print('UserList3 email : => $i   ${usersMap3[i].email}');
+      if (list2.isNotEmpty) {
+        for (int i = 0; i < (list2.length); i++) {
+          print('result list $i : ${list2[i].name}');
+          print('result list $i : ${list2[i].email}');
         }
       }
-      print('\n =======================解析数组结束5========================== \n ');
-      print('\n =======================使用泛型解析结束========================== \n ');
+
+      print('\n ===============BasePageListResponse解析数组结束================== \n ');
     }
   }
 
