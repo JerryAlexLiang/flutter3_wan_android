@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/page/main/MainController.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,21 +21,43 @@ class MainPage extends GetView<MainController> {
 
     return Scaffold(
       bottomNavigationBar: _buildBottomNavigatorBar(),
-      body: WillPopScope(
-        onWillPop: () {
+      // body: WillPopScope(
+      //   onWillPop: () {
+      //     if (lastDateTime == null ||
+      //         DateTime.now().difference(lastDateTime!) >
+      //             const Duration(seconds: 1)) {
+      //       lastDateTime = DateTime.now();
+      //       Fluttertoast.showToast(msg: StringsConstant.exitAppToast.tr);
+      //       return Future.value(false);
+      //     }
+      //     return Future.value(true);
+      //   },
+      //   child: _buildPageView(),
+      // ),
+
+      /// ios 是顶部导航返回按钮
+      /// Android 是系统返回按钮
+      body: PopScope(
+        canPop: false, // 允许返回
+        onPopInvoked: (bool didPop) async {
+          if (didPop) {
+            return;
+          }
           if (lastDateTime == null ||
               DateTime.now().difference(lastDateTime!) >
                   const Duration(seconds: 1)) {
             lastDateTime = DateTime.now();
             Fluttertoast.showToast(msg: StringsConstant.exitAppToast.tr);
-            return Future.value(false);
+          } else {
+            // 系统级别导航栈 退出程序
+            SystemNavigator.pop();
           }
-          return Future.value(true);
         },
         child: _buildPageView(),
       ),
     );
   }
+
 
   /// 底部导航栏
   Widget _buildBottomNavigatorBar() {
