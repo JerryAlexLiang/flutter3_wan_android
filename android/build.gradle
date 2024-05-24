@@ -1,26 +1,7 @@
-buildscript {
-    ext.kotlin_version = '1.7.10'
-    repositories {
-//        google()
-//        mavenCentral()
-
-        //修改的地方 使用阿里云镜像地址
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
-    }
-
-    dependencies {
-//        classpath 'com.android.tools.build:gradle:7.3.1'
-        classpath 'com.android.tools.build:gradle:7.4.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 allprojects {
     repositories {
-//        google()
-//        mavenCentral()
+        // google()
+        // mavenCentral()
 
         //修改的地方 使用阿里云镜像地址
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -29,12 +10,12 @@ allprojects {
     }
 }
 
-rootProject.buildDir = '../build'
+rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
-    project.evaluationDependsOn(':app')
+    project.evaluationDependsOn(":app")
 }
 
 tasks.register("clean", Delete) {

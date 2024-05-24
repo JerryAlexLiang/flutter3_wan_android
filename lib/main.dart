@@ -3,14 +3,20 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter3_wan_android/http/base_list_response.dart';
+import 'package:flutter3_wan_android/config/config.dart';
 import 'package:flutter3_wan_android/http/base_page_list_response.dart';
-import 'package:flutter3_wan_android/http/base_response.dart';
-import 'package:flutter3_wan_android/http/page_list.dart';
+import 'package:flutter3_wan_android/routes/app_pages.dart';
+import 'package:flutter3_wan_android/routes/app_routes.dart';
+import 'package:flutter3_wan_android/util/keyboard_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'model/user.dart';
 
 void main() {
+  // 初始化
+  Config.init();
+
   runApp(const MyApp());
 }
 
@@ -20,32 +26,74 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        colorScheme: const ColorScheme.dark(brightness: Brightness.dark),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          builder: (context, child) {
+            return Scaffold(
+              // Global GestureDetector that will dismiss the keyboard
+              // 关闭键盘的全局手势检测器
+              body: GestureDetector(
+                child: child,
+                onTap: () => KeyboardUtils.hideKeyboard(context),
+              ),
+            );
+          },
+          enableLog: true,
+          smartManagement: SmartManagement.keepFactory,
+          themeMode: ThemeMode.light,
+          initialRoute: AppRoutes.splash,
+          getPages: AppPages.routes,
+        );
+      },
     );
   }
 }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return RefreshConfiguration(
+//       hideFooterWhenNotFull: false,
+//       child: ScreenUtilInit(
+//         designSize: const Size(360, 690),
+//         builder: (context, child) {
+//           return OKToast(
+//
+//               /// 导致弹出系统粘贴时红屏原因为FlutterEasyLoading在materialApp上层，
+//               /// 导致系统粘贴时的弹框找到顶层时widget不是material报错.修复方式为将FlutterEasyLoading改为build时引入
+//               child: ScreenUtilInit(
+//             designSize: const Size(360, 690),
+//             builder: (context, child) => GetMaterialApp(
+//               debugShowCheckedModeBanner: false,
+//               builder: (context, child) {
+//                 return FlutterEasyLoading(
+//                     child: Scaffold(
+//                   // Global GestureDetector that will dismiss the keyboard
+//                   // 关闭键盘的全局手势检测器
+//                   body: GestureDetector(
+//                     child: child,
+//                     onTap: () => KeyboardUtils.hideKeyboard(context),
+//                   ),
+//                 ));
+//               },
+//               enableLog: true,
+//               smartManagement: SmartManagement.keepFactory,
+//               themeMode: ThemeMode.light,
+//               initialRoute: AppRoutes.splash,
+//               getPages: AppPages.routes,
+//             ),
+//           ));
+//         },
+//       ),
+//     );
+//   }
+// }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -464,7 +512,8 @@ class _MyHomePageState extends State<MyHomePage> {
     var list2 = data.datas;
 
     if (kDebugMode) {
-      print('\n ===============BasePageListResponse解析数组开始================== \n ');
+      print(
+          '\n ===============BasePageListResponse解析数组开始================== \n ');
 
       print('result : $result2');
       print('result toString : ${result2.toString()}');
@@ -482,7 +531,8 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
 
-      print('\n ===============BasePageListResponse解析数组结束================== \n ');
+      print(
+          '\n ===============BasePageListResponse解析数组结束================== \n ');
     }
   }
 

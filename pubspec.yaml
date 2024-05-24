@@ -36,17 +36,35 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
 
-  # 1、强大的Dart Http请求库
-  dio: ^5.3.2
+  # 1、GetX 是 Flutter 上的一个轻量且强大的解决方案：高性能的状态管理、智能的依赖注入和便捷的路由管理  State Manager、Navigation Manager
+  get: ^4.6.6
 
-  # 2、flutter_easyloading: ^3.0.5
+  # 2、刷新加载框架
+  pull_to_refresh: ^2.0.0
+
+  # 3、屏幕适配
+  flutter_screenutil: ^5.9.1
+
+  # 5、oktoast: ^3.1.1  包裹你的 MaterialApp,不是包裹你的 Scaffold
+  oktoast: ^3.4.0
+
+  # 6、flutter_easyloading: ^3.0.3
   flutter_easyloading: ^3.0.5
 
-  # 3、fluttertoast插件依赖原生
-  fluttertoast: ^8.2.2
+  #  # 7、shared_preferences
+  #  shared_preferences: ^2.2.3
 
-  # 4、json_annotation
-  json_annotation: ^4.8.1
+  # 8、强大的Dart Http请求库
+  dio: ^5.4.3+1
+
+  # 9、logger
+  logger: ^1.1.0
+
+  # 10、fluttertoast插件依赖原生
+  fluttertoast: ^8.2.5
+
+  # 24、json_annotation
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +102,10 @@ flutter:
   assets:
     - assets/user_list.json
     - assets/user_list2.json
+    - images/
+    - assets/
+    - assets/lottie/
+    - assets/svg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
