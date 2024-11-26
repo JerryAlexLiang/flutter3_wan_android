@@ -11,7 +11,7 @@ BasePageListResponse<T> _$BasePageListResponseFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     BasePageListResponse<T>(
-      json['code'] as int,
+      (json['code'] as num).toInt(),
       json['message'] as String,
       PageList<T>.fromJson(
           json['data'] as Map<String, dynamic>, (value) => fromJsonT(value)),

@@ -13,7 +13,7 @@ BaseResponse<T> _$BaseResponseFromJson<T>(
     BaseResponse<T>(
       message: json['message'] as String?,
       success: json['success'] as bool?,
-      code: json['code'] as int?,
+      code: (json['code'] as num?)?.toInt(),
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
     );
 

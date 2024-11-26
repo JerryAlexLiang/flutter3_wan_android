@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter3_wan_android/page/home/home_view.dart';
+import 'package:flutter3_wan_android/page/home/home_page.dart';
 import 'package:flutter3_wan_android/page/mine/mine_view.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_view.dart';
 import 'package:flutter3_wan_android/page/project/project_view.dart';
@@ -25,6 +25,8 @@ class MainController extends GetxController {
 
   /// 底部导航栏Tab点击切换PageView
   void switchBottomTabBar(int index) {
+    // 这里将索引切换设置在onPageChanged方法中即可
+    // currentPage = index;
     // 点击底部BottomNavigationBarItem切换PageView页面
     pageController.jumpToPage(index);
   }

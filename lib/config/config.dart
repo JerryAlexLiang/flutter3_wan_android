@@ -2,9 +2,20 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter3_wan_android/http/dio_util.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 
 class Config {
+  // 是否启用代理
+  static const proxyEnable = false;
+
+  /// 代理服务IP
+  static const proxyIp = '172.16.43.74';
+
+  /// 代理服务端口
+  static const proxyPort = 8866;
+
   static bool isDebug = true;
 
   /// 是否 release
@@ -23,6 +34,9 @@ class Config {
 
     //因为EasyLoading是一个全局单例, 所以你可以在任意一个地方自定义它的样式:
     EasyLoading.instance.indicatorType = EasyLoadingIndicatorType.threeBounce;
+
+    // 初始化网络请求工具类
+    Get.lazyPut(() => DioUtil());
 
     //初始化状态栏
     initStatusBar();

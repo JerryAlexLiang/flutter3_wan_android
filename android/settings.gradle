@@ -10,14 +10,14 @@ pluginManagement {
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
     repositories {
-        // google()
-        // mavenCentral()
-        // gradlePluginPortal()
+         google()
+         mavenCentral()
+         gradlePluginPortal()
 
-        //修改的地方 使用阿里云镜像地址
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+//        //修改的地方 使用阿里云镜像地址
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
     }
 }
 

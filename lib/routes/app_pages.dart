@@ -1,5 +1,5 @@
 import 'package:flutter3_wan_android/page/home/home_binding.dart';
-import 'package:flutter3_wan_android/page/home/home_view.dart';
+import 'package:flutter3_wan_android/page/home/home_page.dart';
 import 'package:flutter3_wan_android/page/main/MainBinding.dart';
 import 'package:flutter3_wan_android/page/main/MainPage.dart';
 import 'package:flutter3_wan_android/page/mine/mine_binding.dart';
@@ -30,7 +30,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.main,
-      page: () => MainPage(),
+      page: () => const MainPage(),
       binding: MainBinding(),
     ),
 

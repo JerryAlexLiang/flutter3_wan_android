@@ -12,7 +12,7 @@ BaseListResponse<T> _$BaseListResponseFromJson<T>(
 ) =>
     BaseListResponse<T>(
       (json['data'] as List<dynamic>).map(fromJsonT).toList(),
-      json['code'] as int,
+      (json['code'] as num).toInt(),
       json['message'] as String,
     );
 

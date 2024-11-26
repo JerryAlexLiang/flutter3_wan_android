@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/util/keyboard_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:window_size/window_size.dart';
 
 import 'model/user.dart';
 
@@ -17,7 +19,28 @@ void main() {
   // 初始化
   Config.init();
 
+  setupWindow();
+
   runApp(const MyApp());
+}
+
+const double windowWidth = 360;
+const double windowHeight = 690;
+
+void setupWindow() {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    WidgetsFlutterBinding.ensureInitialized();
+    setWindowTitle('Flutter3');
+    setWindowMinSize(const Size(windowWidth, windowHeight));
+    setWindowMaxSize(const Size(windowWidth, windowHeight));
+    getCurrentScreen().then((screen) {
+      setWindowFrame(Rect.fromCenter(
+        center: screen!.frame.center,
+        width: windowWidth,
+        height: windowHeight,
+      ));
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {

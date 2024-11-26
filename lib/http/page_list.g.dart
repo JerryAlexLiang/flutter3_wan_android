@@ -12,12 +12,12 @@ PageList<T> _$PageListFromJson<T>(
 ) =>
     PageList<T>(
       (json['datas'] as List<dynamic>).map(fromJsonT).toList(),
-      json['curPage'] as int?,
-      json['offset'] as int?,
+      (json['curPage'] as num?)?.toInt(),
+      (json['offset'] as num?)?.toInt(),
       json['over'] as bool?,
-      json['pageCount'] as int?,
-      json['size'] as int?,
-      json['total'] as int?,
+      (json['pageCount'] as num?)?.toInt(),
+      (json['size'] as num?)?.toInt(),
+      (json['total'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$PageListToJson<T>(

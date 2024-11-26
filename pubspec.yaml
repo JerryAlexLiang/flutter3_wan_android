@@ -57,11 +57,34 @@ dependencies:
   # 8、强大的Dart Http请求库
   dio: ^5.4.3+1
 
-  # 9、logger
+  # 9、cookie_jar: ^3.0.1  dio_cookie_manager: ^2.0.0
+  cookie_jar: ^4.0.8
+  dio_cookie_manager: ^3.1.1
+
+  # 10、path_provider: ^2.0.7
+  path_provider: ^2.1.3
+
+  # 11、网络检测 https://pub.flutter-io.cn/packages/connectivity
+  #  connectivity: ^3.0.6  已弃用 此插件已被Flutter Community Plus插件版本connectivity_plus取代
+  connectivity_plus: ^6.0.3
+
+  # 12、logger
   logger: ^1.1.0
 
-  # 10、fluttertoast插件依赖原生
+  # 13、fluttertoast插件依赖原生
   fluttertoast: ^8.2.5
+
+  # 14、window_sizer
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+
+  # 15、加载html标签 flutter_html: ^2.1.5
+  flutter_html: ^3.0.0-alpha.3
+
+  # 16、图片缓存框架
+  cached_network_image: ^3.4.1
 
   # 24、json_annotation
   json_annotation: ^4.9.0
@@ -80,8 +103,9 @@ dev_dependencies:
   # json_serializable
   # 1、一次性代码生成  flutter pub run build_runner build --delete-conflicting-outputs
   # 2、持续生成代码   flutter pub run build_runner watch 启动监听
-  json_serializable: ^6.7.1
   build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
