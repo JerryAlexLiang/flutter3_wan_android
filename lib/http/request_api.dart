@@ -56,9 +56,12 @@ class RequestApi {
   static const String homeBanner = '/banner/json';
 
   /// 获取首页文章列表  GET https://www.wanandroid.com/article/list/0/json
+  /// https://www.wanandroid.com/article/list/0/json/?page_size=3
   // 参数：页码，拼接在连接中，从0开始
+  // 该接口支持传入 page_size 控制分页数量，取值为[1-40]，不传则使用默认值，
+  // 一旦传入了 page_size，后续该接口分页都需要带上，否则会造成分页读取错误。
   // static const String homeArticleList = "/article/list/%s/json";
-  static const String homeArticleList = "/article/list/page/json";
+  static const String homeArticleList = "/article/list/page/json/";
 
   /// 导航 GET https://www.wanandroid.com/navi/json
   static const String navigationList = "/navi/json";

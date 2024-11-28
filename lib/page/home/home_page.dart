@@ -4,6 +4,7 @@ import 'package:flutter3_wan_android/res/gaps.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
 import 'package:flutter3_wan_android/widget/state/load_state.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'home_controller.dart';
 
@@ -21,20 +22,17 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: RippleView(
-          onTap: ()=>{
-            homeController.getHomeData()
-          },
+          onTap: () => homeController.onFirstInHomeData(),
           child: const Text('Loading'),
         ),
       ),
       body: Obx(() {
         if (homeController.loadState == LoadState.simpleShimmerLoading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.red,
-              backgroundColor: Colors.grey,
-            ),
-          );
+          return loadingWidget();
+        } else if (homeController.loadState == LoadState.fail) {
+          return failPageWidget();
+        } else if (homeController.loadState == LoadState.empty) {
+          return emptyPageWidget();
         } else if (homeController.loadState == LoadState.success) {
           return SafeArea(
             top: true,
@@ -43,14 +41,14 @@ class HomePage extends StatelessWidget {
               children: [
                 Center(
                   child: Center(
-                    child: ListView.builder(
-                      itemCount: homeController.homeArticleList.length,
-                      itemBuilder: (context, index) {
-                        return ArticleListItemWidget(
-                          dataList: homeController.homeArticleList,
-                          index: index,
-                        );
-                      },
+                    // child: _homeArticleList(),
+                    child: SmartRefresher(
+                      controller: homeController.refreshController,
+                      enablePullDown: true,
+                      enablePullUp: true,
+                      onRefresh: homeController.onRefreshHomeData,
+                      onLoading: () => homeController.onLoadMoreHomeData(),
+                      child: _homeArticleList(),
                     ),
                   ),
                 )
@@ -60,6 +58,45 @@ class HomePage extends StatelessWidget {
         }
         return Gaps.empty;
       }),
+    );
+  }
+
+  Widget emptyPageWidget() {
+    return RippleView(
+          onTap: () => homeController.onFirstInHomeData(),
+          child: const Center(
+            child: Text('EmptyView'),
+          ),
+        );
+  }
+
+  RippleView failPageWidget() {
+    return RippleView(
+          onTap: () => homeController.onFirstInHomeData(),
+          child: const Center(
+            child: Text('FailView'),
+          ),
+        );
+  }
+
+  Center loadingWidget() {
+    return const Center(
+      child: CircularProgressIndicator(
+        color: Colors.red,
+        backgroundColor: Colors.grey,
+      ),
+    );
+  }
+
+  ListView _homeArticleList() {
+    return ListView.builder(
+      itemCount: homeController.homeArticleList.length,
+      itemBuilder: (context, index) {
+        return ArticleListItemWidget(
+          dataList: homeController.homeArticleList,
+          index: index,
+        );
+      },
     );
   }
 }
