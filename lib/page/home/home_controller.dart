@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/http/base_response.dart';
 import 'package:flutter3_wan_android/http/dio_method.dart';
@@ -8,6 +9,7 @@ import 'package:flutter3_wan_android/http/dio_util.dart';
 import 'package:flutter3_wan_android/http/request_api.dart';
 import 'package:flutter3_wan_android/model/article_item_bean.dart';
 import 'package:flutter3_wan_android/model/article_page_bean.dart';
+import 'package:flutter3_wan_android/model/home_banner_model.dart';
 import 'package:flutter3_wan_android/util/logger_util.dart';
 import 'package:flutter3_wan_android/widget/state/load_state.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -34,16 +36,32 @@ class HomeController extends GetxController {
 
   set loadState(value) => _loadState.value = value;
 
+  //滚动控制器
+  late ScrollController scrollController;
+
   /// 当前页数
   int currentPage = 0;
 
   /// 首页文章列表
   final homeArticleList = RxList<ArticleItemBean>();
 
+  /// 首页Banner列表
+  final homeBannerList = RxList<HomeBannerModel>();
+
   @override
   void onInit() {
     super.onInit();
+    // 滑动监听器
+    scrollController = ScrollController();
+    // 刷新监听器
     _refreshController = RefreshController(initialRefresh: initialRefresh);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+    _refreshController.dispose();
   }
 
   @override
@@ -63,6 +81,9 @@ class HomeController extends GetxController {
       // currentPage = 0;
       currentPage = 1581;
       // currentPage = 1590;
+
+      // 获取首页Banner数据源
+      getHomeBannerData();
     }
     if (refreshState == RefreshState.loadMore) {
       /// 上滑加载更多
@@ -150,7 +171,7 @@ class HomeController extends GetxController {
         if (success) {
           var data = response.data;
           var articlePageBean = ArticlePageBean.fromJson(data);
-          var datas = articlePageBean.datas;
+          List<ArticleItemBean>? datas = articlePageBean.datas;
 
           // 加载到底部最后一页判断
           var over = articlePageBean.over;
@@ -241,6 +262,24 @@ class HomeController extends GetxController {
       _refreshController.refreshCompleted(resetFooterState: true);
     } else if (refreshState == RefreshState.loadMore) {
       _refreshController.loadComplete();
+    }
+  }
+
+  Future<void> getHomeBannerData() async {
+    BaseResponse response =
+        await DioUtil().request(RequestApi.homeBanner, method: DioMethod.get);
+    //拿到res.data就可以进行Json解析了，这里一般用来构造实体类
+    var success = response.success;
+    if (success != null) {
+      if (success) {
+        refreshLoadingSuccess(RefreshState.refresh);
+
+        ///列表转换的时候一定要加一下强转List<dynamic>，否则会报错
+        List<HomeBannerModel> bannerList = (response.data as List<dynamic>)
+            .map((e) => HomeBannerModel.fromJson(e))
+            .toList();
+        homeBannerList.assignAll(bannerList);
+      }
     }
   }
 }

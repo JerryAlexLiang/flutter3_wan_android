@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/page/home/component/article_list_item_widget.dart';
+import 'package:flutter3_wan_android/page/home/component/home_banner.dart';
 import 'package:flutter3_wan_android/res/gaps.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
 import 'package:flutter3_wan_android/widget/state/load_state.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -23,7 +25,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: RippleView(
           onTap: () => homeController.onFirstInHomeData(),
-          child: const Text('Loading'),
+          child: const Text('Home'),
         ),
       ),
       body: Obx(() {
@@ -48,7 +50,7 @@ class HomePage extends StatelessWidget {
                       enablePullUp: true,
                       onRefresh: homeController.onRefreshHomeData,
                       onLoading: () => homeController.onLoadMoreHomeData(),
-                      child: _homeArticleList(),
+                      child: _homeScrollerView(),
                     ),
                   ),
                 )
@@ -63,20 +65,20 @@ class HomePage extends StatelessWidget {
 
   Widget emptyPageWidget() {
     return RippleView(
-          onTap: () => homeController.onFirstInHomeData(),
-          child: const Center(
-            child: Text('EmptyView'),
-          ),
-        );
+      onTap: () => homeController.onFirstInHomeData(),
+      child: const Center(
+        child: Text('EmptyView'),
+      ),
+    );
   }
 
   RippleView failPageWidget() {
     return RippleView(
-          onTap: () => homeController.onFirstInHomeData(),
-          child: const Center(
-            child: Text('FailView'),
-          ),
-        );
+      onTap: () => homeController.onFirstInHomeData(),
+      child: const Center(
+        child: Text('FailView'),
+      ),
+    );
   }
 
   Center loadingWidget() {
@@ -88,15 +90,49 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  ListView _homeArticleList() {
-    return ListView.builder(
-      itemCount: homeController.homeArticleList.length,
-      itemBuilder: (context, index) {
-        return ArticleListItemWidget(
-          dataList: homeController.homeArticleList,
-          index: index,
+  Widget _homeScrollerView() {
+    return CustomScrollView(
+      // 滑动监听器
+      controller: homeController.scrollController,
+      slivers: [
+        _homeBanner(),
+        _homeArticleList(),
+      ],
+    );
+  }
+
+  Widget _homeArticleList() {
+    // return ListView.builder(
+    //   itemCount: controller.homeArticleList.length,
+    //   itemBuilder: (context, index) {
+    //     return ArticleListItemWidget(
+    //       dataList: homeController.homeArticleList,
+    //       index: index,
+    //     );
+    //   },
+    // );
+
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+      (BuildContext context, int index) {
+        return Container(
+          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          child: ArticleListItemWidget(
+            dataList: homeController.homeArticleList,
+            index: index,
+          ),
         );
       },
+      childCount: homeController.homeArticleList.length,
+    ));
+  }
+
+  Widget _homeBanner() {
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: 120.h,
+        child: const HomeBannerWidget(),
+      ),
     );
   }
 }

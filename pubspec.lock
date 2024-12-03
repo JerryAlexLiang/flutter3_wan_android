@@ -355,6 +355,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.1"
+  flutter_swiper_null_safety_flutter3:
+    dependency: "direct main"
+    description:
+      name: flutter_swiper_null_safety_flutter3
+      sha256: f312cf1394036b3b6ad4d8b2fffef15bb664252f910e5d9841e2b7dfc255cf8c
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
