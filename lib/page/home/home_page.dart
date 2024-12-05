@@ -50,7 +50,8 @@ class HomePage extends StatelessWidget {
                       enablePullUp: true,
                       onRefresh: homeController.onRefreshHomeData,
                       onLoading: () => homeController.onLoadMoreHomeData(),
-                      child: _homeScrollerView(),
+                      child: _homeArticleList(),
+                      // child: _homeScrollerView(),
                     ),
                   ),
                 )
@@ -95,23 +96,27 @@ class HomePage extends StatelessWidget {
       // 滑动监听器
       controller: homeController.scrollController,
       slivers: [
-        _homeBanner(),
-        _homeArticleList(),
+        // _homeBanner(),
+        _homeArticleSliverList(),
       ],
     );
   }
 
   Widget _homeArticleList() {
-    // return ListView.builder(
-    //   itemCount: controller.homeArticleList.length,
-    //   itemBuilder: (context, index) {
-    //     return ArticleListItemWidget(
-    //       dataList: homeController.homeArticleList,
-    //       index: index,
-    //     );
-    //   },
-    // );
+    return ListView.builder(
+      itemCount: homeController.homeArticleList.length,
+      itemBuilder: (context, index) {
+        return ArticleListItemWidget(
+          dataList: homeController.homeArticleList,
+          index: index,
+        );
+      },
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+    );
+  }
 
+  Widget _homeArticleSliverList() {
     return SliverList(
         delegate: SliverChildBuilderDelegate(
       (BuildContext context, int index) {
