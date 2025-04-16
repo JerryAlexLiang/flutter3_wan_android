@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter3_wan_android/page/main/MainController.dart';
+import 'package:flutter3_wan_android/page/main/main_controller.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -39,7 +39,21 @@ class MainPage extends GetView<MainController> {
       /// Android 是系统返回按钮
       body: PopScope(
         canPop: false, // 允许返回
-        onPopInvoked: (bool didPop) async {
+        // onPopInvoked: (bool didPop) async {
+        //   if (didPop) {
+        //     return;
+        //   }
+        //   if (lastDateTime == null ||
+        //       DateTime.now().difference(lastDateTime!) >
+        //           const Duration(seconds: 1)) {
+        //     lastDateTime = DateTime.now();
+        //     Fluttertoast.showToast(msg: StringsConstant.exitAppToast.tr);
+        //   } else {
+        //     // 系统级别导航栈 退出程序
+        //     SystemNavigator.pop();
+        //   }
+        // },
+        onPopInvokedWithResult: (bool didPop, result) async {
           if (didPop) {
             return;
           }
@@ -57,7 +71,6 @@ class MainPage extends GetView<MainController> {
       ),
     );
   }
-
 
   /// 底部导航栏
   Widget _buildBottomNavigatorBar() {

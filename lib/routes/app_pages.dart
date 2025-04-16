@@ -1,7 +1,7 @@
 import 'package:flutter3_wan_android/page/home/home_binding.dart';
 import 'package:flutter3_wan_android/page/home/home_page.dart';
-import 'package:flutter3_wan_android/page/main/MainBinding.dart';
-import 'package:flutter3_wan_android/page/main/MainPage.dart';
+import 'package:flutter3_wan_android/page/main/main_binding.dart';
+import 'package:flutter3_wan_android/page/main/main_page.dart';
 import 'package:flutter3_wan_android/page/mine/mine_binding.dart';
 import 'package:flutter3_wan_android/page/mine/mine_view.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_binding.dart';

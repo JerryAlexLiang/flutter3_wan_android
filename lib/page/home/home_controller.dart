@@ -234,6 +234,8 @@ class HomeController extends GetxController {
     LoggerUtil.d('============> onFirstInHomeData()', tag: 'HomeController');
     getHomeData(
       loadingType: Constant.simpleShimmerLoading,
+      // loadingType: Constant.multipleShimmerLoading,
+      // loadingType: Constant.lottieRocketLoading,
       refreshState: RefreshState.first,
     );
   }
@@ -274,7 +276,16 @@ class HomeController extends GetxController {
       if (success) {
         refreshLoadingSuccess(RefreshState.refresh);
 
-        ///列表转换的时候一定要加一下强转List<dynamic>，否则会报错
+        /// 列表转换的时候一定要加一下强转List<dynamic>，否则会报错
+        /// 在Flutter中，当你从一个数据源（如API或数据库）获取数据并希望将其转换为一个特定类型的列表时，通常需要进行类型转换。
+        /// 这是因为Dart是一种强类型语言，它要求在编译时知道每个变量的确切类型。
+        /// 此处从一个API获取了一个JSON数组，并希望将其转换为一个List<HomeBannerModel>，其中HomeBannerModel是你定义的一个Dart类。
+        /// JSON解析器（如dart:convert库中的jsonDecode函数）通常会将JSON数组解析为List<dynamic>，因为JSON本身是无类型的。
+        /// 为了确保类型安全并避免运行时错误，你需要将这个List<dynamic>显式转换为List<HomeBannerModel>。
+        /// 在这个例子中，jsonDecode将JSON字符串解析为List<dynamic>。然后，我们通过map函数将每个动态元素转换为HomeBannerModel实例，并将结果转换回列表。
+        /// 这种类型转换确保了在使用myList时，Dart知道它是一个List<HomeBannerModel>，从而可以在编译时进行类型检查，减少运行时错误的可能性。
+        /// 如果你不进行这种类型转换，Dart编译器将无法确定列表中元素的具体类型，这可能会导致类型安全问题和运行时错误。因此，在处理从外部来源获取的数据时，
+        /// 进行适当的类型转换是一个良好的实践。
         List<HomeBannerModel> bannerList = (response.data as List<dynamic>)
             .map((e) => HomeBannerModel.fromJson(e))
             .toList();

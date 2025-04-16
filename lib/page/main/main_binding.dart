@@ -1,5 +1,5 @@
 import 'package:flutter3_wan_android/page/home/home_controller.dart';
-import 'package:flutter3_wan_android/page/main/MainController.dart';
+import 'package:flutter3_wan_android/page/main/main_controller.dart';
 import 'package:flutter3_wan_android/page/mine/mine_logic.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_logic.dart';
 import 'package:flutter3_wan_android/page/project/project_logic.dart';

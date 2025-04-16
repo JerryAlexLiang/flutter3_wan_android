@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/page/home/component/article_list_item_widget.dart';
 import 'package:flutter3_wan_android/page/home/component/home_banner.dart';
 import 'package:flutter3_wan_android/res/gaps.dart';
+import 'package:flutter3_wan_android/res/strings.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
+import 'package:flutter3_wan_android/widget/state/load_error_page.dart';
 import 'package:flutter3_wan_android/widget/state/load_state.dart';
+import 'package:flutter3_wan_android/widget/state/loading_lottie_rocket_widget.dart';
+import 'package:flutter3_wan_android/widget/state/shimmer_loading_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -30,7 +34,24 @@ class HomePage extends StatelessWidget {
       ),
       body: Obx(() {
         if (homeController.loadState == LoadState.simpleShimmerLoading) {
-          return loadingWidget();
+          // return loadingWidget();
+          return const ShimmerLoadingPage();
+        } else if (homeController.loadState ==
+            LoadState.multipleShimmerLoading) {
+          return const ShimmerLoadingPage(
+            simpleLoading: false,
+          );
+        } else if (homeController.loadState == LoadState.lottieRocketLoading) {
+          return const Column(
+            children: [
+              Gaps.vGap150,
+              LoadingLottieRocketWidget(
+                visible: true,
+                animate: true,
+                repeat: true,
+              ),
+            ],
+          );
         } else if (homeController.loadState == LoadState.fail) {
           return failPageWidget();
         } else if (homeController.loadState == LoadState.empty) {
@@ -50,8 +71,8 @@ class HomePage extends StatelessWidget {
                       enablePullUp: true,
                       onRefresh: homeController.onRefreshHomeData,
                       onLoading: () => homeController.onLoadMoreHomeData(),
-                      child: _homeArticleList(),
-                      // child: _homeScrollerView(),
+                      // child: _homeArticleList(),
+                      child: _homeScrollerView(),
                     ),
                   ),
                 )
@@ -65,20 +86,30 @@ class HomePage extends StatelessWidget {
   }
 
   Widget emptyPageWidget() {
-    return RippleView(
+    // return RippleView(
+    //   onTap: () => homeController.onFirstInHomeData(),
+    //   child: const Center(
+    //     child: Text('EmptyView'),
+    //   ),
+    // );
+    return EmptyErrorStatePage(
+      loadState: LoadState.empty,
       onTap: () => homeController.onFirstInHomeData(),
-      child: const Center(
-        child: Text('EmptyView'),
-      ),
+      errMsg: StringsConstant.noData.tr,
     );
   }
 
-  RippleView failPageWidget() {
-    return RippleView(
+  Widget failPageWidget() {
+    // return RippleView(
+    //   onTap: () => homeController.onFirstInHomeData(),
+    //   child: const Center(
+    //     child: Text('FailView'),
+    //   ),
+    // );
+    return EmptyErrorStatePage(
+      loadState: LoadState.fail,
       onTap: () => homeController.onFirstInHomeData(),
-      child: const Center(
-        child: Text('FailView'),
-      ),
+      errMsg: '',
     );
   }
 
@@ -96,9 +127,12 @@ class HomePage extends StatelessWidget {
       // 滑动监听器
       controller: homeController.scrollController,
       slivers: [
-        // _homeBanner(),
+        _homeBanner(),
         _homeArticleSliverList(),
       ],
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
     );
   }
 
@@ -118,18 +152,19 @@ class HomePage extends StatelessWidget {
 
   Widget _homeArticleSliverList() {
     return SliverList(
-        delegate: SliverChildBuilderDelegate(
-      (BuildContext context, int index) {
-        return Container(
-          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: ArticleListItemWidget(
-            dataList: homeController.homeArticleList,
-            index: index,
-          ),
-        );
-      },
-      childCount: homeController.homeArticleList.length,
-    ));
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            child: ArticleListItemWidget(
+              dataList: homeController.homeArticleList,
+              index: index,
+            ),
+          );
+        },
+        childCount: homeController.homeArticleList.length,
+      ),
+    );
   }
 
   Widget _homeBanner() {
