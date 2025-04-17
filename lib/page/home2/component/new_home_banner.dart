@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter3_wan_android/model/home_banner_model.dart';
 import 'package:flutter3_wan_android/page/home2/home2_controller.dart';
 import 'package:flutter3_wan_android/widget/cached_network_image_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,50 +11,55 @@ import 'package:oktoast/oktoast.dart';
 /// 作者: Jerry
 /// 描述: 首页Banner
 
-class NewHomeBannerWidget extends GetView<Home2Controller> {
-  const NewHomeBannerWidget({super.key});
+class NewHomeBannerWidget extends StatelessWidget {
+  const NewHomeBannerWidget({
+    super.key,
+    required this.homeBannerList,
+  });
+
+  // BannerList
+  final List<HomeBannerModel> homeBannerList;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Swiper(
-        loop: true,
-        autoplay: true,
-        //scale：两侧item的缩放比
-        scale: 0.95,
-        //viewportFraction：视图宽度，即显示的item的宽度屏占比
-        viewportFraction: 0.85,
-        //指示器
-        pagination: const SwiperPagination(
-          alignment: Alignment.bottomRight,
-          margin: EdgeInsets.only(
-            bottom: 10,
-            right: 30,
-          ),
-          // builder: SwiperPagination.dots,
-          builder: SwiperPagination.fraction,
+    return Swiper(
+      loop: true,
+      autoplay: true,
+      //scale：两侧item的缩放比
+      scale: 0.95,
+      //viewportFraction：视图宽度，即显示的item的宽度屏占比
+      viewportFraction: 0.85,
+      //指示器
+      pagination: const SwiperPagination(
+        alignment: Alignment.bottomRight,
+        margin: EdgeInsets.only(
+          bottom: 10,
+          right: 30,
         ),
-        itemCount: controller.state.homeBannerList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return bannerItemView(index);
-        },
-        onTap: (index) {
-          // Fluttertoast.showToast(msg: controller.homeBannerList[index].title);
-          showToast(
-            controller.state.homeBannerList[index].title,
-            position: ToastPosition.bottom,
-          );
-        },
-      );
-    });
+        // builder: SwiperPagination.dots,
+        builder: SwiperPagination.fraction,
+      ),
+      itemCount: homeBannerList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return bannerItemView(index);
+      },
+      onTap: (index) {
+        // Fluttertoast.showToast(msg: homeBannerList[index].title);
+        showToast(
+          homeBannerList[index].title,
+          position: ToastPosition.bottom,
+        );
+      },
+    );
   }
 
   Widget bannerItemView(int index) {
     return CachedNetworkImageView(
-      visible:
-          controller.state.homeBannerList[index].imagePath.isNotEmpty ? true : false,
+      visible: homeBannerList[index].imagePath.isNotEmpty
+          ? true
+          : false,
       borderRadius: 10,
-      imageUrl: controller.state.homeBannerList[index].imagePath,
+      imageUrl: homeBannerList[index].imagePath,
       fit: BoxFit.cover,
       width: Get.width,
       height: 120.h,

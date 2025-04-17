@@ -63,12 +63,19 @@ class Home2Page extends StatelessWidget {
   }
 
   Widget _homeBanner() {
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        height: 120.h,
-        child: const NewHomeBannerWidget(),
-      ),
-    );
+    return Obx(() {
+      if (state.homeBannerList.isEmpty) {
+        return const SliverToBoxAdapter(child: SizedBox.shrink());
+      }
+      return SliverToBoxAdapter(
+        child: SizedBox(
+          height: 120.h,
+          child: NewHomeBannerWidget(
+            homeBannerList: state.homeBannerList,
+          ),
+        ),
+      );
+    });
   }
 
   Widget _homeArticleSliverList() {
