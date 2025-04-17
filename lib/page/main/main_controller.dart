@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/page/home/home_page.dart';
+import 'package:flutter3_wan_android/page/home2/home2_page.dart';
 import 'package:flutter3_wan_android/page/mine/mine_view.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_view.dart';
 import 'package:flutter3_wan_android/page/project/project_view.dart';
@@ -59,13 +60,21 @@ class MainController extends GetxController {
   // PageView Body
   void initPageViewBodies() {
     tabPageBodies = <Widget>[
+      // KeepAliveWrapper(
+      //   // keepAlive默认为true
+      //   // keepAlive为 true 后会缓存所有的列表项，列表项将不会销毁。
+      //   // keepAlive为 false 时，列表项滑出预加载区域后将会别销毁。
+      //   // 使用时一定要注意是否必要，因为对所有列表项都缓存的会导致更多的内存消耗
+      //   keepAlive: true,
+      //   child: HomePage(),
+      // ),
       KeepAliveWrapper(
         // keepAlive默认为true
         // keepAlive为 true 后会缓存所有的列表项，列表项将不会销毁。
         // keepAlive为 false 时，列表项滑出预加载区域后将会别销毁。
         // 使用时一定要注意是否必要，因为对所有列表项都缓存的会导致更多的内存消耗
         keepAlive: true,
-        child: HomePage(),
+        child: Home2Page(),
       ),
       KeepAliveWrapper(
         child: NavigationPage(),

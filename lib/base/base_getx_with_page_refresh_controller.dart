@@ -129,8 +129,8 @@ class BaseGetXWithPageRefreshController extends BaseGetXController {
               refreshLoadingSuccess(refreshState);
             }
           }
-          LoggerUtil.e(
-              'handleRequestWithRefreshPaging  success ====> code: ${response.code}  message: ${response.message}');
+          LoggerUtil.d(
+              'handleRequestWithRefreshPaging  success ====> code: ${response.code}  message: ${response.message} \n data: $data');
         } else {
           /// 请求失败
           /// 第一次加载，请求失败，则显示错误页面

@@ -110,8 +110,8 @@ class BaseGetXController extends GetxController {
             dismissEasyLoading();
             onSuccess(data);
           }
-          LoggerUtil.e(
-              'BaseGetController handleRequest success ====> code: ${response.code}  message: ${response.message}');
+          LoggerUtil.d(
+              'BaseGetController handleRequest success ====> code: ${response.code}  message: ${response.message} \n data: $data');
         } else {
           /// 请求失败
           loadState = LoadState.fail;

@@ -8,10 +8,12 @@ import 'package:flutter3_wan_android/config/config.dart';
 import 'package:flutter3_wan_android/http/base_page_list_response.dart';
 import 'package:flutter3_wan_android/routes/app_pages.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
+import 'package:flutter3_wan_android/theme/app_theme.dart';
 import 'package:flutter3_wan_android/util/keyboard_util.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:window_size/window_size.dart';
 
 import 'model/user.dart';
@@ -50,29 +52,35 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return OKToast(
-      child: ScreenUtilInit(
-        designSize: const Size(360, 690),
-        builder: (context, child) {
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              return Scaffold(
-                // Global GestureDetector that will dismiss the keyboard
-                // 关闭键盘的全局手势检测器
-                body: GestureDetector(
-                  child: child,
-                  onTap: () => KeyboardUtils.hideKeyboard(context),
-                ),
-              );
-            },
-            enableLog: true,
-            smartManagement: SmartManagement.keepFactory,
-            themeMode: ThemeMode.light,
-            initialRoute: AppRoutes.splash,
-            getPages: AppPages.routes,
-          );
-        },
+    return RefreshConfiguration(
+      hideFooterWhenNotFull: false,
+      child: OKToast(
+        child: ScreenUtilInit(
+          designSize: const Size(360, 690),
+          builder: (context, child) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              builder: (context, child) {
+                return Scaffold(
+                  // Global GestureDetector that will dismiss the keyboard
+                  // 关闭键盘的全局手势检测器
+                  body: GestureDetector(
+                    child: child,
+                    onTap: () => KeyboardUtils.hideKeyboard(context),
+                  ),
+                );
+              },
+              enableLog: true,
+              smartManagement: SmartManagement.keepFactory,
+              /// 主题颜色
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: ThemeMode.light,
+              initialRoute: AppRoutes.splash,
+              getPages: AppPages.routes,
+            );
+          },
+        ),
       ),
     );
   }

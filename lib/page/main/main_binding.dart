@@ -1,4 +1,5 @@
 import 'package:flutter3_wan_android/page/home/home_controller.dart';
+import 'package:flutter3_wan_android/page/home2/home2_controller.dart';
 import 'package:flutter3_wan_android/page/main/main_controller.dart';
 import 'package:flutter3_wan_android/page/mine/mine_logic.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_logic.dart';
@@ -12,7 +13,8 @@ class MainBinding extends Bindings {
     // 首页导航页控制器
     Get.lazyPut(() => MainController());
     // HomePage
-    Get.lazyPut(() => HomeController());
+    // Get.lazyPut(() => HomeController());
+    Get.lazyPut(() => Home2Controller());
     // NavigationPage
     Get.lazyPut(() => NavigationLogic());
     // ProjectPage

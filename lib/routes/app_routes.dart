@@ -13,6 +13,7 @@ abstract class AppRoutes {
   static const collectListPage = '/collectListPage';
 
   static const homePage = '/homePage';
+  static const homePage2 = '/homePage2';
   static const navigationPage = '/navigationPage';
   static const projectPage = '/projectPage';
   static const systemPage = '/systemPage';

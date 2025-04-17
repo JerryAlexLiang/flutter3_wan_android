@@ -1,5 +1,7 @@
 import 'package:flutter3_wan_android/page/home/home_binding.dart';
 import 'package:flutter3_wan_android/page/home/home_page.dart';
+import 'package:flutter3_wan_android/page/home2/home2_binding.dart';
+import 'package:flutter3_wan_android/page/home2/home2_page.dart';
 import 'package:flutter3_wan_android/page/main/main_binding.dart';
 import 'package:flutter3_wan_android/page/main/main_page.dart';
 import 'package:flutter3_wan_android/page/mine/mine_binding.dart';
@@ -33,11 +35,15 @@ class AppPages {
       page: () => const MainPage(),
       binding: MainBinding(),
     ),
-
+    // GetPage(
+    //   name: AppRoutes.homePage,
+    //   page: () => HomePage(),
+    //   binding: HomeBinding(),
+    // ),
     GetPage(
-      name: AppRoutes.homePage,
-      page: () => HomePage(),
-      binding: HomeBinding(),
+      name: AppRoutes.homePage2,
+      page: () => Home2Page(),
+      binding: Home2Binding(),
     ),
     GetPage(
       name: AppRoutes.navigationPage,
@@ -59,7 +65,6 @@ class AppPages {
       page: () => MinePage(),
       binding: MineBinding(),
     ),
-
 
     // GetPage(
     //   name: AppRoutes.settingPage,
