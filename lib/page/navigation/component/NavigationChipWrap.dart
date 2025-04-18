@@ -45,7 +45,8 @@ class NavigationChipWrap extends StatelessWidget {
           border: Border.all(color: Colors.white, width: 0.1),
         ),
         child: InkWell(
-          splashColor: Colors.transparent.withOpacity(0.1),
+          // splashColor: Colors.transparent.withOpacity(0.1),
+          splashColor: Colors.transparent.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(20),
           onTap: () => onTap(model),
           child: Container(

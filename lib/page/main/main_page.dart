@@ -92,7 +92,7 @@ class MainPage extends GetView<MainController> {
   _buildPageView() {
     return PageView(
       // // 禁止滑动
-      // physics: const NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       controller: controller.pageController,
       onPageChanged: (int index) => controller.onPageChanged(index),
       children: controller.tabPageBodies,
