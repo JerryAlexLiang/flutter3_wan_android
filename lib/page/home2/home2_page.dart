@@ -20,7 +20,7 @@ class Home2Page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: RippleView(
-          onTap: () => home2Controller.onFirstInHomeData(),
+          onTap: () => home2Controller.onFirstInRequestData(),
           child: const Text('Home'),
         ),
       ),
@@ -39,9 +39,9 @@ class Home2Page extends StatelessWidget {
   Widget homeRefreshWidget() {
     return RefreshPagingStatePage<Home2Controller>(
       controller: home2Controller,
-      onPressed: () => home2Controller.onFirstInHomeData(),
-      onRefresh: () => home2Controller.onRefreshHomeData(),
-      onLoadMore: () => home2Controller.onLoadMoreHomeData(),
+      onPressed: () => home2Controller.onFirstInRequestData(),
+      onRefresh: () => home2Controller.onRefreshRequestData(),
+      onLoadMore: () => home2Controller.onLoadMoreRequestData(),
       refreshController: home2Controller.refreshController,
       lottieRocketRefreshHeader: true,
       child: _homeScrollerView(),

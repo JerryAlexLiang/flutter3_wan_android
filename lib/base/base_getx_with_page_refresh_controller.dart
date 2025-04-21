@@ -12,7 +12,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 /// 创建日期: 2024/12/06 16:33
 /// 作者: Jerry
 /// 描述: 基于GetX的可刷新及分页的 BaseGetXWithPageRefreshController
-class BaseGetXWithPageRefreshController extends BaseGetXController {
+abstract class BaseGetXWithPageRefreshController extends BaseGetXController {
   /// 下拉刷新控制器
   late RefreshController _refreshController;
 
@@ -203,4 +203,13 @@ class BaseGetXWithPageRefreshController extends BaseGetXController {
     refreshLoadState = LoadState.success;
     _refreshController.loadNoData();
   }
+
+  /// 第一次进入
+  void onFirstInRequestData();
+
+  /// 下拉刷新
+  void onRefreshRequestData();
+
+  /// 上滑加载更多
+  void onLoadMoreRequestData();
 }

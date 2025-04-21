@@ -23,7 +23,7 @@ class Home2Controller extends BaseGetXWithPageRefreshController {
   void onReady() {
     super.onReady();
     // 第一次进入首页
-    onFirstInHomeData();
+    onFirstInRequestData();
   }
 
   Future<void> getHomeData({
@@ -163,6 +163,7 @@ class Home2Controller extends BaseGetXWithPageRefreshController {
         state.homeBannerList.assignAll(bannerList);
 
         LoggerUtil.d('getHomeBannerData====> ${state.homeBannerList}');
+        LoggerUtil.d('getHomeBannerData====> $refreshState');
       },
       onFail: (value) {
         LoggerUtil.e(
@@ -176,7 +177,8 @@ class Home2Controller extends BaseGetXWithPageRefreshController {
   }
 
   /// 第一次进入首页
-  void onFirstInHomeData() {
+  @override
+  void onFirstInRequestData() {
     LoggerUtil.d('============> onFirstInHomeData()', tag: 'HomeController');
     getHomeData(
       loadingType: Constant.simpleShimmerLoading,
@@ -186,21 +188,23 @@ class Home2Controller extends BaseGetXWithPageRefreshController {
     );
   }
 
-  /// 下拉刷新首页
-  void onRefreshHomeData() {
-    LoggerUtil.d('============> onRefreshHomeData()', tag: 'HomeController');
-    getHomeData(
-      loadingType: Constant.noLoading,
-      refreshState: RefreshState.refresh,
-    );
-  }
-
   /// 上滑加载更多
-  void onLoadMoreHomeData() {
+  @override
+  void onLoadMoreRequestData() {
     LoggerUtil.d('============> onLoadMoreHomeData()', tag: 'HomeController');
     getHomeData(
       loadingType: Constant.noLoading,
       refreshState: RefreshState.loadMore,
+    );
+  }
+
+  /// 下拉刷新首页
+  @override
+  void onRefreshRequestData() {
+    LoggerUtil.d('============> onRefreshHomeData()', tag: 'HomeController');
+    getHomeData(
+      loadingType: Constant.noLoading,
+      refreshState: RefreshState.refresh,
     );
   }
 }

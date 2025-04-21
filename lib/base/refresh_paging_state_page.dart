@@ -21,10 +21,10 @@ class RefreshPagingStatePage<T extends BaseGetXWithPageRefreshController>
   const RefreshPagingStatePage({
     Key? key,
     required this.controller,
+    required this.refreshController,
     required this.onPressed,
     this.errorPage,
     this.emptyPage,
-    required this.refreshController,
     this.onRefresh,
     this.onLoadMore,
     required this.child,

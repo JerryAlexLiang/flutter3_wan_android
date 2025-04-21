@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/base/common_state_page.dart';
+import 'package:flutter3_wan_android/page/project/project_tree_children/project_tree_children_page.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
+import 'package:flutter3_wan_android/util/keep_alive_wrapper.dart';
 import 'package:flutter3_wan_android/widget/custom_underline_tabIndicator.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -198,9 +200,15 @@ class ProjectPage extends StatelessWidget {
 
   Widget? sliverPageView() {
     if (controller.projectTreeTabList.isNotEmpty) {
+      // var list = controller.projectTreeTabList
+      //     .map((e) => Center(
+      //           child: Text(e.name ?? ""),
+      //         ))
+      //     .toList();
+
       var list = controller.projectTreeTabList
-          .map((e) => Center(
-                child: Text(e.name ?? ""),
+          .map((e) => KeepAliveWrapper(
+                child: ProjectTreeChildrenPage(id: e.id),
               ))
           .toList();
 

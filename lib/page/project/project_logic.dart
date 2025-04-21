@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter3_wan_android/base/base_getx_with_page_refresh_controller.dart';
+import 'package:flutter3_wan_android/base/base_getx_controller.dart';
 import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/http/dio_method.dart';
 import 'package:flutter3_wan_android/http/dio_util.dart';
@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 /// 作者: Jerry
 /// 描述: 项目分类-Tab数组
 /// GetSingleTickerProviderStateMixin像SingleTickerProviderMixin一样使用，但只用于Get控制器。简化了GetxController中的AnimationController创建。
-class ProjectLogic extends BaseGetXWithPageRefreshController
+class ProjectLogic extends BaseGetXController
     with GetSingleTickerProviderStateMixin {
   /// 项目分类
   // final projectTreeTabList = List<TreeModel>.empty(growable: true).obs;
