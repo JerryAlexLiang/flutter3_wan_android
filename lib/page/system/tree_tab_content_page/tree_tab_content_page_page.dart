@@ -26,6 +26,7 @@ class TreeTabContentPagePage extends StatelessWidget {
 
     return Scaffold(
       appBar: buildAppBar(treeModel, context),
+      body: sliverPageView(),
     );
   }
 
@@ -159,6 +160,19 @@ class TreeTabContentPagePage extends StatelessWidget {
         fontSize: 14,
         fontWeight: FontWeight.normal,
       ),
+    );
+  }
+
+  Widget sliverPageView() {
+    List<Widget>? list = controller.treeModel.children
+        ?.map((e) => Center(
+              child: Text(e.name ?? ""),
+            ))
+        .toList();
+
+    return TabBarView(
+      controller: controller.tabController,
+      children: list!,
     );
   }
 }
