@@ -54,7 +54,9 @@ class Home2Controller extends BaseGetXWithPageRefreshController {
   /// 获取首页文章列表  GET https://www.wanandroid.com/article/list/0/json
   /// 参数：页码，拼接在连接中，从0开始。
   Future<void> getHomeArticleList(
-      String loadingType, RefreshState refreshState) async {
+    String loadingType,
+    RefreshState refreshState,
+  ) async {
     loadState = LoadState.simpleShimmerLoading;
 
     // https://www.wanandroid.com/article/list/0/json

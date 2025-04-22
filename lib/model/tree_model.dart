@@ -1,65 +1,93 @@
 /// 创建日期: 2025/04/18 14:28
 /// 作者: Jerry
-/// 描述: 项目分类一级liebiao
+/// 描述: 项目分类一级列表
 class TreeModel {
-  String? author;
+  List<Children>? children;
   int? courseId;
-  String? cover;
-  String? desc;
-  int? id; // 该id在获取该分类下项目时需要用到
-  String? lisense;
-  String? lisenseLink;
-  String? name; // 该分类名称
+  int? id;
+  String? name; // 一级的名称
   int? order;
   int? parentChapterId;
-  int? type;
   bool? userControlSetTop;
   int? visible;
 
   TreeModel(
-      {this.author,
+      {this.children,
       this.courseId,
-      this.cover,
-      this.desc,
       this.id,
-      this.lisense,
-      this.lisenseLink,
       this.name,
       this.order,
       this.parentChapterId,
-      this.type,
       this.userControlSetTop,
       this.visible});
 
   TreeModel.fromJson(Map<String, dynamic> json) {
-    author = json['author'];
+    if (json['children'] != null) {
+      children = <Children>[];
+      json['children'].forEach((v) {
+        children!.add(Children.fromJson(v));
+      });
+    }
     courseId = json['courseId'];
-    cover = json['cover'];
-    desc = json['desc'];
     id = json['id'];
-    lisense = json['lisense'];
-    lisenseLink = json['lisenseLink'];
     name = json['name'];
     order = json['order'];
     parentChapterId = json['parentChapterId'];
-    type = json['type'];
     userControlSetTop = json['userControlSetTop'];
     visible = json['visible'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['author'] = author;
+    if (children != null) {
+      data['children'] = children!.map((v) => v.toJson()).toList();
+    }
     data['courseId'] = courseId;
-    data['cover'] = cover;
-    data['desc'] = desc;
     data['id'] = id;
-    data['lisense'] = lisense;
-    data['lisenseLink'] = lisenseLink;
     data['name'] = name;
     data['order'] = order;
     data['parentChapterId'] = parentChapterId;
-    data['type'] = type;
+    data['userControlSetTop'] = userControlSetTop;
+    data['visible'] = visible;
+    return data;
+  }
+}
+
+class Children {
+  int? courseId;
+  int? id; // id会在查看该目录下所有文章时有用
+  String? name; // 子名称
+  int? order;
+  int? parentChapterId;
+  bool? userControlSetTop;
+  int? visible;
+
+  Children(
+      {this.courseId,
+      this.id,
+      this.name,
+      this.order,
+      this.parentChapterId,
+      this.userControlSetTop,
+      this.visible});
+
+  Children.fromJson(Map<String, dynamic> json) {
+    courseId = json['courseId'];
+    id = json['id'];
+    name = json['name'];
+    order = json['order'];
+    parentChapterId = json['parentChapterId'];
+    userControlSetTop = json['userControlSetTop'];
+    visible = json['visible'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['courseId'] = courseId;
+    data['id'] = id;
+    data['name'] = name;
+    data['order'] = order;
+    data['parentChapterId'] = parentChapterId;
     data['userControlSetTop'] = userControlSetTop;
     data['visible'] = visible;
     return data;

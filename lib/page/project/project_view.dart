@@ -28,17 +28,6 @@ class ProjectPage extends StatelessWidget {
         return DefaultTabController(
           length: controller.projectTreeTabList.length,
           initialIndex: 0,
-          // child: Scaffold(
-          //   appBar: AppBar(
-          //     centerTitle: true,
-          //     title: Text(
-          //       StringsConstant.projectPage.tr,
-          //       style: context.titleMediumStyle,
-          //     ),
-          //     bottom: treeTabBar(context),
-          //   ),
-          //   body: sliverPageView(),
-          // ),
           child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -61,7 +50,6 @@ class ProjectPage extends StatelessWidget {
               ],
               bottom: treeTabContainer(context),
             ),
-            // body: sliverPageView(context, controller),
             body: sliverPageView(),
           ),
         );
