@@ -12,6 +12,8 @@ import 'package:flutter3_wan_android/page/project/project_binding.dart';
 import 'package:flutter3_wan_android/page/project/project_view.dart';
 import 'package:flutter3_wan_android/page/system/system_binding.dart';
 import 'package:flutter3_wan_android/page/system/system_view.dart';
+import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_binding.dart';
+import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_page.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
@@ -65,6 +67,11 @@ class AppPages {
       page: () => MinePage(),
       binding: MineBinding(),
     ),
+    GetPage(
+      name: AppRoutes.treeTabContainerPage,
+      page: () => TreeTabContentPagePage(),
+      binding: TreeTabContentPageBinding(),
+    ),
 
     // GetPage(
     //   name: AppRoutes.settingPage,
@@ -98,11 +105,7 @@ class AppPages {
     //   name: AppRoutes.loginRegisterPage,
     //   page: () => LoginRegisterPage(),
     // ),
-    // GetPage(
-    //   name: AppRoutes.treeTabContainerPage,
-    //   page: () => const SystemContentPage(),
-    //   binding: SystemContentBinding(),
-    // ),
+
     // GetPage(
     //   name: AppRoutes.collectListPage,
     //   page: () => CollectPage(),

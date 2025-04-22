@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/base/refresh_paging_state_page.dart';
+import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/model/tree_model.dart';
 import 'package:flutter3_wan_android/page/system/component/tree_chip_wrap.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
@@ -9,7 +10,6 @@ import 'package:flutter3_wan_android/widget/custom_app_bar.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
 import 'system_logic.dart';
@@ -51,14 +51,14 @@ class SystemPage extends StatelessWidget {
                 /// 列表悬浮头
                 return RippleView(
                   onTap: () => {
-                    // Get.toNamed(
-                    //   AppRoutes.treeTabContainerPage,
-                    //   arguments: {
-                    //     "treeModel": controller.systemTreeList[index],
-                    //     "treeModelIndex": 0,
-                    //   },
-                    // )
-                    showToast(controller.systemTreeList[index].name ?? "")
+                    Get.toNamed(
+                      AppRoutes.treeTabContainerPage,
+                      arguments: {
+                        Constant.treeModel: controller.systemTreeList[index],
+                        Constant.treeModelIndex: 0,
+                      },
+                    )
+                    // showToast(controller.systemTreeList[index].name ?? "")
                   },
                   child: StickyHeader(
                     header: treeListItemHeader(
@@ -119,17 +119,17 @@ class SystemPage extends StatelessWidget {
       child: TreeChipWrap(
         chipList: treeModel.children,
         onTap: (Children value, int treeModelIndex) => {
-          // Get.toNamed(
-          //   AppRoutes.treeTabContainerPage,
-          //   arguments: {
-          //     "treeModel": treeModel,
-          //     "treeModelIndex": treeModelIndex,
-          //   },
-          // )
-          showToast(
-            value.name ?? "",
-            position: ToastPosition.bottom,
+          Get.toNamed(
+            AppRoutes.treeTabContainerPage,
+            arguments: {
+              Constant.treeModel: treeModel,
+              Constant.treeModelIndex: treeModelIndex,
+            },
           )
+          // showToast(
+          //   value.name ?? "",
+          //   position: ToastPosition.bottom,
+          // )
         },
       ),
     );

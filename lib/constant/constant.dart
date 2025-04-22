@@ -30,4 +30,11 @@ class Constant {
   // https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202001%2F07%2F20200107073702_exdsf.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637138669&t=76e7709d08b5ee5fd3e346d47bfebeb7
   static const String defaultImageUrlVertical =
       "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202001%2F07%2F20200107073702_exdsf.thumb.400_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637138669&t=76e7709d08b5ee5fd3e346d47bfebeb7";
+
+  // 体系二级界面传参
+  static const String treeModel ="treeModel";
+  static const String treeModelIndex ="treeModelIndex";
+
+
+
 }
