@@ -3,40 +3,30 @@ import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/http/dio_method.dart';
 import 'package:flutter3_wan_android/http/dio_util.dart';
 import 'package:flutter3_wan_android/http/request_api.dart';
-import 'package:flutter3_wan_android/model/ProjectListModel.dart';
 import 'package:flutter3_wan_android/model/article_item_bean.dart';
+import 'package:flutter3_wan_android/model/article_page_bean.dart';
 import 'package:flutter3_wan_android/util/logger_util.dart';
 import 'package:flutter3_wan_android/widget/state/load_state.dart';
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
 
-/// 创建日期: 2025/04/21 14:32
+/// 创建日期: 2025/04/22 16:46
 /// 作者: Jerry
-/// 描述: 项目分类下的子页面分页数据
+/// 描述: 体系二级页面-文章列表
 
-class ProjectTreeChildrenController extends BaseGetXWithPageRefreshController {
-  // cid 分类的id，项目分类接口
+class TreeArticleListController extends BaseGetXWithPageRefreshController {
+  final treeArticleList = RxList<ArticleItemBean>();
+
   final Rx<int?> cid = 0.obs;
 
-  // 分类项目列表
-  final projectTreeArticleList = RxList<ArticleItemBean>();
-
-  void setCid(int? cid) {
-    this.cid.value = cid;
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    loadState = LoadState.lottieRocketLoading;
-    // 项目列表数据 页码：拼接在链接中，从1开始
-    currentPage = 1;
+  void setCid(int? id) {
+    cid.value = id;
   }
 
   /// 第一次进入
   @override
   void onFirstInRequestData() {
-    getProjectChildrenList(
+    requestTreeChildrenArticleListData(
       loadingType: Constant.multipleShimmerLoading,
       refreshState: RefreshState.first,
       cid: cid.value,
@@ -46,42 +36,42 @@ class ProjectTreeChildrenController extends BaseGetXWithPageRefreshController {
   /// 上滑加载更多
   @override
   void onLoadMoreRequestData() {
-    getProjectChildrenList(
+    requestTreeChildrenArticleListData(
       loadingType: Constant.noLoading,
       refreshState: RefreshState.loadMore,
       cid: cid.value,
     );
   }
 
-  /// 下拉刷新
+  /// 下拉刷新首页
   @override
   void onRefreshRequestData() {
-    getProjectChildrenList(
+    requestTreeChildrenArticleListData(
       loadingType: Constant.noLoading,
       refreshState: RefreshState.refresh,
       cid: cid.value,
     );
   }
 
-  /// 项目分类下的文章
-  Future<void> getProjectChildrenList({
+  /// 体系下的文章列表数据
+  Future<void> requestTreeChildrenArticleListData({
     required String loadingType,
     required RefreshState refreshState,
     required int? cid,
   }) async {
     if (refreshState == RefreshState.refresh ||
         refreshState == RefreshState.first) {
-      /// 下拉刷新  项目列表数据 页码：拼接在链接中，从1开始。
-      currentPage = 1;
+      /// 下拉刷新 页码：拼接在链接中，从0开始。
+      currentPage = 0;
     }
     if (refreshState == RefreshState.loadMore) {
       /// 上滑加载更多
       currentPage++;
     }
 
-    //  https://www.wanandroid.com/project/list/1/json?cid=294
+    // https://www.wanandroid.com/article/list/0/json?cid=60
     String requestUrl =
-        sprintf(RequestApi.projectTreeChildrenList, [currentPage]);
+        sprintf(RequestApi.treeChildrenArticleList, [currentPage]);
 
     httpManagerWithRefreshPaging(
       loadingType: loadingType,
@@ -89,21 +79,18 @@ class ProjectTreeChildrenController extends BaseGetXWithPageRefreshController {
       future: DioUtil()
           .request(requestUrl, params: {"cid": cid}, method: DioMethod.get),
       onSuccess: (response) {
-        ProjectListModel projectListModel = ProjectListModel.fromJson(response);
-        List<ArticleItemBean>? dataList = projectListModel.datas;
-        // 加载到底部判断
-        var over = projectListModel.over;
-        if (over != null && over) {
-          loadNoData();
-        }
+        ArticlePageBean articlePageBean = ArticlePageBean.fromJson(response);
+        List<ArticleItemBean>? dataList = articlePageBean.datas;
 
-        // 模拟空数据
-        if (cid == 539) {
-          dataList = null;
+        // 加载到底部判断
+        var over = articlePageBean.over;
+        if (over != null) {
+          if (over) {
+            loadNoData();
+          }
         }
 
         if (dataList != null && dataList.isNotEmpty) {
-          loadState = LoadState.success;
           refreshLoadState = LoadState.success;
 
           /// 循环遍历 装载 可观察变量 isCollect
@@ -112,11 +99,12 @@ class ProjectTreeChildrenController extends BaseGetXWithPageRefreshController {
             element.isCollect = collect;
           }
 
-          if (refreshState == RefreshState.first ||
-              refreshState == RefreshState.refresh) {
-            projectTreeArticleList.assignAll(dataList);
+          if (refreshState == RefreshState.first) {
+            treeArticleList.assignAll(dataList);
+          } else if (refreshState == RefreshState.refresh) {
+            treeArticleList.assignAll(dataList);
           } else if (refreshState == RefreshState.loadMore) {
-            projectTreeArticleList.addAll(dataList);
+            treeArticleList.addAll(dataList);
           }
         } else {
           if (loadingType != Constant.noLoading) {
@@ -128,11 +116,10 @@ class ProjectTreeChildrenController extends BaseGetXWithPageRefreshController {
       },
       onFail: (value) {
         LoggerUtil.e("${value.message}",
-            tag: "ProjectTreeArticleListPageViewController");
+            tag: "TreeArticleListPageViewController");
       },
-      onError: (value) {
-        LoggerUtil.e(value.message,
-            tag: "ProjectTreeArticleListPageViewController");
+      onError: (error) {
+        LoggerUtil.e(error.message, tag: "TreeArticleListPageViewController");
       },
     );
   }

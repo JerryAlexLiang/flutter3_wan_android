@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/model/tree_model.dart';
+import 'package:flutter3_wan_android/page/system/tree_article_list/tree_article_list_page.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
+import 'package:flutter3_wan_android/util/keep_alive_wrapper.dart';
 import 'package:flutter3_wan_android/widget/custom_underline_tabIndicator.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -164,15 +166,25 @@ class TreeTabContentPagePage extends StatelessWidget {
   }
 
   Widget sliverPageView() {
-    List<Widget>? list = controller.treeModel.children
-        ?.map((e) => Center(
-              child: Text(e.name ?? ""),
+    // List<Widget>? list = controller.treeModel.children
+    //     ?.map((e) => Center(
+    //           child: Text(e.name ?? ""),
+    //         ))
+    //     .toList();
+
+    // var pageViewList = controller.treeModel.children
+    //     ?.map((e) => TreeArticleListPage(id: e.id))
+    //     .toList();
+
+    var pageViewList = controller.treeModel.children
+        ?.map((e) => KeepAliveWrapper(
+              child: TreeArticleListPage(id: e.id),
             ))
         .toList();
 
     return TabBarView(
       controller: controller.tabController,
-      children: list!,
+      children: pageViewList!,
     );
   }
 }

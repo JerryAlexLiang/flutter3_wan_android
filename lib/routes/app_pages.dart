@@ -63,15 +63,16 @@ class AppPages {
       binding: SystemBinding(),
     ),
     GetPage(
-      name: AppRoutes.minePage,
-      page: () => MinePage(),
-      binding: MineBinding(),
-    ),
-    GetPage(
       name: AppRoutes.treeTabContainerPage,
       page: () => TreeTabContentPagePage(),
       binding: TreeTabContentPageBinding(),
     ),
+    GetPage(
+      name: AppRoutes.minePage,
+      page: () => MinePage(),
+      binding: MineBinding(),
+    ),
+
 
     // GetPage(
     //   name: AppRoutes.settingPage,
