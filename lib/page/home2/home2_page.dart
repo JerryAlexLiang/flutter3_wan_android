@@ -69,7 +69,7 @@ class Home2Page extends StatelessWidget {
       }
       return SliverToBoxAdapter(
         child: SizedBox(
-          height: 120.h,
+          height: 130.h,
           child: NewHomeBannerWidget(
             homeBannerList: state.homeBannerList,
           ),

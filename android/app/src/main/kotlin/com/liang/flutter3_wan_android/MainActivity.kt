@@ -1,4 +1,4 @@
-package com.example.flutter3_wan_android
+package com.liang.flutter3_wan_android
 
 import io.flutter.embedding.android.FlutterActivity
 

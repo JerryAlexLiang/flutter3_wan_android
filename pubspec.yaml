@@ -105,6 +105,12 @@ dependencies:
   # 22、列表悬浮头  https://github.com/fluttercommunity/flutter_sticky_headers sticky_headers
   sticky_headers: ^0.3.0+2
 
+  # 23、WebView插件 在iOS上，WebView小部件由WKWebView支持；在Android上，WebView小部件由WebView支持
+  webview_flutter: ^4.11.0
+
+  # 24、加载SVG图片 https://pub.flutter-io.cn/packages/flutter_svg
+  flutter_svg: ^2.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

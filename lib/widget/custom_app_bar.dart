@@ -13,7 +13,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     Key? key,
     this.opacity = 1.0,
-    this.appBarHeight = 56.0,
+    // this.appBarHeight = 56.0,
+    this.appBarHeight = kToolbarHeight,
     this.backgroundColor,
     this.title = '',
     this.centerTitle = '',

@@ -3,11 +3,14 @@ import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/model/article_item_bean.dart';
 import 'package:flutter3_wan_android/res/gaps.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
+import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
 import 'package:flutter3_wan_android/util/decoration_style.dart';
+import 'package:flutter3_wan_android/util/html_utils.dart';
 import 'package:flutter3_wan_android/widget/cached_network_image_view.dart';
 import 'package:flutter3_wan_android/widget/custom_point_widget.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +34,15 @@ class NewArticleListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RippleView(
-      onTap: () => {Fluttertoast.showToast(msg: "${dataList[index].title}")},
+      onTap: () => {
+        Get.toNamed(
+          AppRoutes.articleDetailPage,
+          arguments: {
+            Constant.articleData: dataList[index],
+            Constant.showCollect: true,
+          },
+        ),
+      },
       child: Container(
         // 边距10
         // padding: const EdgeInsets.symmetric(
@@ -218,24 +229,17 @@ class NewArticleListItemWidget extends StatelessWidget {
       children: [
         Visibility(
           visible: dataList[index].title!.isNotEmpty ? true : false,
-          // child: Html(
-          //   data: HtmlUtils.html2HighLight(
-          //     html: dataList[index].title!,
-          //     // color: 'yellow',
-          //   ),
-          //   style: {
-          //     'font': Style(
-          //       fontSize: FontSize(15),
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //   },
-          // ),
-          child: Text(
-            dataList[index].title!,
-            style: const TextStyle(
-              fontSize: 15.0,
-              fontWeight: FontWeight.w500,
+          child: Html(
+            data: HtmlUtils.html2HighLight(
+              html: dataList[index].title!,
+              // color: 'yellow',
             ),
+            style: {
+              'font': Style(
+                fontSize: FontSize(15),
+                fontWeight: FontWeight.w500,
+              ),
+            },
           ),
         ),
         Visibility(
@@ -331,27 +335,27 @@ class NewArticleListItemWidget extends StatelessWidget {
 
   RippleView collectWidget() {
     return RippleView(
-        onTap: () => {
-          // onCollectClick(index),
-          Fluttertoast.showToast(msg: "${dataList[index].author}")
-        },
-        radius: 50,
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          child: Obx(() {
-            return Icon(
-              Icons.favorite,
-              color: dataList[index].isCollect
-                  ? Colors.red
-                  : Colors.grey.withOpacity(0.5),
-              // color: loginState
-              //     ? (dataList[index].isCollect
-              //         ? Colors.red
-              //         : Colors.grey.withOpacity(0.5))
-              //     : Colors.grey.withOpacity(0.5),
-            );
-          }),
-        ),
-      );
+      onTap: () => {
+        // onCollectClick(index),
+        Fluttertoast.showToast(msg: "${dataList[index].author}")
+      },
+      radius: 50,
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        child: Obx(() {
+          return Icon(
+            Icons.favorite,
+            color: dataList[index].isCollect
+                ? Colors.red
+                : Colors.grey.withOpacity(0.5),
+            // color: loginState
+            //     ? (dataList[index].isCollect
+            //         ? Colors.red
+            //         : Colors.grey.withOpacity(0.5))
+            //     : Colors.grey.withOpacity(0.5),
+          );
+        }),
+      ),
+    );
   }
 }

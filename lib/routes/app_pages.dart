@@ -14,6 +14,8 @@ import 'package:flutter3_wan_android/page/system/system_binding.dart';
 import 'package:flutter3_wan_android/page/system/system_view.dart';
 import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_binding.dart';
 import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_page.dart';
+import 'package:flutter3_wan_android/page/web/article_detail_binding.dart';
+import 'package:flutter3_wan_android/page/web/article_detail_page.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
@@ -72,7 +74,11 @@ class AppPages {
       page: () => MinePage(),
       binding: MineBinding(),
     ),
-
+    GetPage(
+      name: AppRoutes.articleDetailPage,
+      page: () => ArticleDetailPage(),
+      binding: ArticleDetailBinding(),
+    ),
 
     // GetPage(
     //   name: AppRoutes.settingPage,
@@ -93,10 +99,6 @@ class AppPages {
     //   page: () => SearchPage(),
     //   binding: SearchBinding(),
     //   transition: Transition.fadeIn,
-    // ),
-    // GetPage(
-    //   name: AppRoutes.articleDetailPage,
-    //   page: () => const ArticleDetailPage(),
     // ),
     // GetPage(
     //   name: AppRoutes.webDetailCommonPage,
