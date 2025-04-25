@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/http/dio_util.dart';
+import 'package:flutter3_wan_android/page/login/app_user_login_state_controller.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
@@ -37,6 +38,10 @@ class Config {
 
     // 初始化网络请求工具类
     Get.lazyPut(() => DioUtil());
+
+    // 用户状态
+    var appUserLoginStateController =
+        Get.put<AppUserLoginStateController>(AppUserLoginStateController());
 
     //初始化状态栏
     initStatusBar();

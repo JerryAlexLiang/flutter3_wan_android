@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter3_wan_android/base/base_getx_controller.dart';
 import 'package:flutter3_wan_android/constant/constant.dart';
@@ -130,7 +132,7 @@ abstract class BaseGetXWithPageRefreshController extends BaseGetXController {
             }
           }
           LoggerUtil.d(
-              'handleRequestWithRefreshPaging  success ====> code: ${response.code}  message: ${response.message} \n data: $data');
+              'handleRequestWithRefreshPaging  success ====> code: ${response.code}  message: ${response.message} \n data: ${jsonEncode(data)}');
         } else {
           /// 请求失败
           /// 第一次加载，请求失败，则显示错误页面

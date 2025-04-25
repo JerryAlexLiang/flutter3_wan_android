@@ -31,5 +31,7 @@ class R {
   static const String iconInvertedTriangle =
       'images/icon_inverted_triangle.png';
 
-  static const String iconSplashBg = 'images/splash_bkpp.png';
+  static const String iconSplashBg = 'images/icon_splash_bg.png';
+  static const String iconLoginBg = 'images/icon_login_bg.jpg';
+  static const String iconRegisterBg = 'images/icon_register_bg.jpeg';
 }

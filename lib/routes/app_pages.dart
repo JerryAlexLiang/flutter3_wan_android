@@ -1,7 +1,6 @@
-import 'package:flutter3_wan_android/page/home/home_binding.dart';
-import 'package:flutter3_wan_android/page/home/home_page.dart';
 import 'package:flutter3_wan_android/page/home2/home2_binding.dart';
 import 'package:flutter3_wan_android/page/home2/home2_page.dart';
+import 'package:flutter3_wan_android/page/login/login_register/login_register_page.dart';
 import 'package:flutter3_wan_android/page/main/main_binding.dart';
 import 'package:flutter3_wan_android/page/main/main_page.dart';
 import 'package:flutter3_wan_android/page/mine/mine_binding.dart';
@@ -14,6 +13,7 @@ import 'package:flutter3_wan_android/page/system/system_binding.dart';
 import 'package:flutter3_wan_android/page/system/system_view.dart';
 import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_binding.dart';
 import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_page.dart';
+import 'package:flutter3_wan_android/page/unknown_route_page.dart';
 import 'package:flutter3_wan_android/page/web/article_detail_binding.dart';
 import 'package:flutter3_wan_android/page/web/article_detail_page.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
@@ -23,10 +23,10 @@ import '../page/splash/SplashBinding.dart';
 import '../page/splash/SplashPage.dart';
 
 class AppPages {
-  // static final unknownRoute = GetPage(
-  //   name: AppRoutes.unknownRoutePage,
-  //   page: () => const UnKnownRoutePage(),
-  // );
+  static final unknownRoute = GetPage(
+    name: AppRoutes.unknownRoutePage,
+    page: () => const UnKnownRoutePage(),
+  );
 
   static final List<GetPage> routes = [
     GetPage(
@@ -79,6 +79,10 @@ class AppPages {
       page: () => ArticleDetailPage(),
       binding: ArticleDetailBinding(),
     ),
+    GetPage(
+      name: AppRoutes.loginRegisterPage,
+      page: () => LoginRegisterPage(),
+    ),
 
     // GetPage(
     //   name: AppRoutes.settingPage,
@@ -104,11 +108,6 @@ class AppPages {
     //   name: AppRoutes.webDetailCommonPage,
     //   page: () => const WebDetailCommonPage(),
     // ),
-    // GetPage(
-    //   name: AppRoutes.loginRegisterPage,
-    //   page: () => LoginRegisterPage(),
-    // ),
-
     // GetPage(
     //   name: AppRoutes.collectListPage,
     //   page: () => CollectPage(),

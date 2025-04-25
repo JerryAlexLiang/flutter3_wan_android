@@ -10,6 +10,7 @@ import 'package:flutter3_wan_android/routes/app_pages.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
 import 'package:flutter3_wan_android/util/keyboard_util.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
@@ -61,17 +62,22 @@ class MyApp extends StatelessWidget {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               builder: (context, child) {
-                return Scaffold(
-                  // Global GestureDetector that will dismiss the keyboard
-                  // 关闭键盘的全局手势检测器
-                  body: GestureDetector(
-                    child: child,
-                    onTap: () => KeyboardUtils.hideKeyboard(context),
+                /// 导致弹出系统粘贴时红屏原因为FlutterEasyLoading在materialApp上层，
+                /// 导致系统粘贴时的弹框找到顶层时widget不是material报错.修复方式为将FlutterEasyLoading改为build时引入
+                return FlutterEasyLoading(
+                  child: Scaffold(
+                    // Global GestureDetector that will dismiss the keyboard
+                    // 关闭键盘的全局手势检测器
+                    body: GestureDetector(
+                      child: child,
+                      onTap: () => KeyboardUtils.hideKeyboard(context),
+                    ),
                   ),
                 );
               },
               enableLog: true,
               smartManagement: SmartManagement.keepFactory,
+
               /// 主题颜色
               theme: lightTheme,
               darkTheme: darkTheme,
@@ -85,49 +91,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return RefreshConfiguration(
-//       hideFooterWhenNotFull: false,
-//       child: ScreenUtilInit(
-//         designSize: const Size(360, 690),
-//         builder: (context, child) {
-//           return OKToast(
-//
-//               /// 导致弹出系统粘贴时红屏原因为FlutterEasyLoading在materialApp上层，
-//               /// 导致系统粘贴时的弹框找到顶层时widget不是material报错.修复方式为将FlutterEasyLoading改为build时引入
-//               child: ScreenUtilInit(
-//             designSize: const Size(360, 690),
-//             builder: (context, child) => GetMaterialApp(
-//               debugShowCheckedModeBanner: false,
-//               builder: (context, child) {
-//                 return FlutterEasyLoading(
-//                     child: Scaffold(
-//                   // Global GestureDetector that will dismiss the keyboard
-//                   // 关闭键盘的全局手势检测器
-//                   body: GestureDetector(
-//                     child: child,
-//                     onTap: () => KeyboardUtils.hideKeyboard(context),
-//                   ),
-//                 ));
-//               },
-//               enableLog: true,
-//               smartManagement: SmartManagement.keepFactory,
-//               themeMode: ThemeMode.light,
-//               initialRoute: AppRoutes.splash,
-//               getPages: AppPages.routes,
-//             ),
-//           ));
-//         },
-//       ),
-//     );
-//   }
-// }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});

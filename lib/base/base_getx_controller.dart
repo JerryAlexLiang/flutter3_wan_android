@@ -2,6 +2,8 @@
 /// 作者: Jerry
 /// 描述: 基于GetX的 BaseGetController
 
+import 'dart:convert';
+
 import 'package:flutter3_wan_android/constant/constant.dart';
 import 'package:flutter3_wan_android/http/base_response.dart';
 import 'package:flutter3_wan_android/http/handle_dio_error.dart';
@@ -111,7 +113,7 @@ class BaseGetXController extends GetxController {
             onSuccess(data);
           }
           LoggerUtil.d(
-              'BaseGetController handleRequest success ====> code: ${response.code}  message: ${response.message} \n data: $data');
+              'BaseGetController handleRequest success ====> code: ${response.code}  message: ${response.message} \n data: ${jsonEncode(data)}');
         } else {
           /// 请求失败
           loadState = LoadState.fail;

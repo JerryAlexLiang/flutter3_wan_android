@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter3_wan_android/http/base_response.dart';
 import 'package:flutter3_wan_android/http/request_api.dart';
@@ -43,7 +45,8 @@ class DioInterceptors extends Interceptor {
       //请求成功时对数据做基本处理 BaseUrl
       if (response.statusCode == 200) {
         if (response.data['errorCode'] == 0) {
-          LoggerUtil.d("=======> wan success ${response.data['data']}");
+          LoggerUtil.d(
+              "=======> wan success ${jsonEncode(response.data['data'])}");
           response.data = BaseResponse(
             code: BaseResponseCode.success,
             message: '数据请求成功啦!',
