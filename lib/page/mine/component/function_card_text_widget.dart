@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter3_wan_android/page/login/app_user_login_state_controller.dart';
 import 'package:flutter3_wan_android/page/mine/mine_controller.dart';
 import 'package:flutter3_wan_android/res/gaps.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
@@ -30,8 +31,7 @@ class FunctionCardTextWidget extends GetView<MineController> {
         child: Column(
           children: [
             Text(
-              // appStateController.isLogin.value ? '$count' : "-",
-              "-",
+              appStateController.isLogin.value ? '$count' : "-",
               style: countTextStyle ??
                   context.bodyLargeStyle?.copyWith(
                     fontSize: 16,

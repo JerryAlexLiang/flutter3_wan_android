@@ -15,6 +15,7 @@ class AppUserLoginStateController extends BaseGetXController {
 
   /// 个人用户信息
   final userInfo = UserInfoModel().obs;
+  /// 积分信息
   final coinInfo = CoinInfo().obs;
 
   /// 登录状态
