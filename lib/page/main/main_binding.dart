@@ -1,4 +1,5 @@
 import 'package:flutter3_wan_android/page/home2/home2_controller.dart';
+import 'package:flutter3_wan_android/page/login/login_register/login_register_controller.dart';
 import 'package:flutter3_wan_android/page/main/main_controller.dart';
 import 'package:flutter3_wan_android/page/mine/mine_controller.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_logic.dart';
@@ -26,5 +27,7 @@ class MainBinding extends Bindings {
 
     // 文章详情控制器（收藏、点赞等）多个地方使用，所以在进入MainPage时，就初始化
     Get.lazyPut(() => ArticleDetailController());
+    // 登录逻辑控制器
+    Get.lazyPut(() => LoginRegisterController());
   }
 }

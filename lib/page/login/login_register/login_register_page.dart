@@ -18,7 +18,7 @@ import 'login_register_controller.dart';
 class LoginRegisterPage extends StatelessWidget {
   LoginRegisterPage({Key? key}) : super(key: key);
 
-  final LoginRegisterController controller = Get.put(LoginRegisterController());
+  final controller = Get.find<LoginRegisterController>();
 
   @override
   Widget build(BuildContext context) {

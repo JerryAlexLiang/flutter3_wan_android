@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/http/dio_util.dart';
 import 'package:flutter3_wan_android/page/login/app_user_login_state_controller.dart';
+import 'package:flutter3_wan_android/util/sp_util.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Config {
   // 是否启用代理
@@ -33,18 +35,28 @@ class Config {
     //运行开始
     WidgetsFlutterBinding.ensureInitialized();
 
+    //初始化状态栏
+    initStatusBar();
+
     //因为EasyLoading是一个全局单例, 所以你可以在任意一个地方自定义它的样式:
     EasyLoading.instance.indicatorType = EasyLoadingIndicatorType.threeBounce;
+
+    //初始化持久工具
+    await Get.putAsync(() => SharedPreferences.getInstance());
 
     // 初始化网络请求工具类
     Get.lazyPut(() => DioUtil());
 
     // 用户状态
-    var appUserLoginStateController =
-        Get.put<AppUserLoginStateController>(AppUserLoginStateController());
+    Get.put<AppUserLoginStateController>(AppUserLoginStateController());
 
-    //初始化状态栏
-    initStatusBar();
+    // 获取用户存储信息
+    var userInfo = SpUtil.getUserInfo();
+    if (userInfo != null) {
+      setLoginState(true);
+    } else {
+      setLoginState(false);
+    }
   }
 
   static void initStatusBar() {

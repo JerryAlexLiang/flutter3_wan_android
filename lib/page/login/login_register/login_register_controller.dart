@@ -11,6 +11,7 @@ import 'package:flutter3_wan_android/res/r.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
 import 'package:flutter3_wan_android/util/keyboard_util.dart';
 import 'package:flutter3_wan_android/util/logger_util.dart';
+import 'package:flutter3_wan_android/util/sp_util.dart';
 import 'package:flutter3_wan_android/util/toast_utils.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -181,9 +182,9 @@ class LoginRegisterController extends BaseGetXController {
         UserInfoModel userInfoModel = UserInfoModel.fromJson(value);
         LoggerUtil.d('login success : ${userInfoModel.toJson()}');
         EasyLoading.showSuccess(StringsConstant.loginSuccess.tr);
-        // // 保存用户数据
-        // SpUtil.saveUserInfo(userInfoModel);
-        // appStateController.updateUserInfo();
+        // 保存用户数据
+        SpUtil.saveUserInfo(userInfoModel);
+        appStateController.updateUserInfo();
         // 保存登录状态true
         setLoginState(true);
         Get.back();
@@ -198,4 +199,30 @@ class LoginRegisterController extends BaseGetXController {
       },
     );
   }
+
+  /// 退出登录
+  void gotoLogout() {
+    httpManager(
+      loadingType: Constant.showLoadingDialog,
+      future: DioUtil().request(RequestApi.goToLogout, method: DioMethod.get),
+      onSuccess: (response) {
+        // 清除Cookies
+        DioUtil().clearCookie();
+        // 保存登录状态true
+        setLoginState(false);
+        appStateController.updateUserInfo();
+        // 清除保存的用户数据
+        SpUtil.clearUserInfo();
+        EasyLoading.showSuccess(StringsConstant.logoutSuccess.tr);
+        Get.back();
+      },
+      onFail: (value) {
+        EasyLoading.showError('${StringsConstant.logoutFail.tr},$value');
+      },
+      onError: (value) {
+        EasyLoading.showError('${StringsConstant.logoutFail.tr},$value');
+      },
+    );
+  }
+
 }

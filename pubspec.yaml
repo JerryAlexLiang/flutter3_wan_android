@@ -111,6 +111,9 @@ dependencies:
   # 24、加载SVG图片 https://pub.flutter-io.cn/packages/flutter_svg
   flutter_svg: ^2.1.0
 
+  # 25、shared_preferences
+  shared_preferences: ^2.5.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

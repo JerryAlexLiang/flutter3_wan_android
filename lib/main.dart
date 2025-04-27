@@ -19,9 +19,9 @@ import 'package:window_size/window_size.dart';
 
 import 'model/user.dart';
 
-void main() {
+void main() async{
   // 初始化
-  Config.init();
+  await Config.init();
 
   setupWindow();
 
