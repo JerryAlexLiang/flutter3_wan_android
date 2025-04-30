@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/base/refresh_paging_state_page.dart';
 import 'package:flutter3_wan_android/page/login/login_register/login_register_controller.dart';
+import 'package:flutter3_wan_android/res/r.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
 import 'package:flutter3_wan_android/util/toast_utils.dart';
@@ -164,7 +165,7 @@ class MinePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                         clipBehavior: Clip.antiAlias,
                         child: Image.asset(
-                          'images/ic_background.png',
+                          'images/icon_background.png',
                           fit: BoxFit.cover,
                           width: 50,
                           height: 50,
@@ -248,7 +249,7 @@ class MinePage extends StatelessWidget {
           height: 220,
           width: Get.width,
           child: Image.asset(
-            'images/ic_background.png',
+            loginState ? R.iconBackground : R.iconBackground2,
             fit: BoxFit.cover,
           ),
         ),
@@ -297,7 +298,7 @@ class MinePage extends StatelessWidget {
     return CustomAppBar(
       isBack: false,
       opacity: controller.percent ?? 0,
-      centerTitle: StringsConstant.minePage,
+      centerTitle: StringsConstant.minePage.tr,
       actionIcon: Icon(
         Icons.settings,
         color: context.appBarIconColor,

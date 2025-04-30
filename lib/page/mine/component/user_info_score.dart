@@ -30,7 +30,9 @@ class UserInfoScore extends GetView<MineController> {
           userRankContainer(),
           const Spacer(),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Fluttertoast.showToast(msg: "消息");
+            },
             icon: const Icon(
               Icons.message,
               color: Colors.white,
@@ -43,73 +45,75 @@ class UserInfoScore extends GetView<MineController> {
 
   Container userRankContainer() {
     return Container(
-          alignment: Alignment.centerLeft,
-          child: Material(
-            color: Colors.transparent,
-            child: Ink(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.lightBlueAccent,
+      alignment: Alignment.centerLeft,
+      child: Material(
+        color: Colors.transparent,
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.lightBlueAccent,
+          ),
+          child: InkWell(
+            onTap: () => Fluttertoast.showToast(msg: "排名"),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+                vertical: 5.h,
               ),
-              child: InkWell(
-                onTap: () => Fluttertoast.showToast(msg: "排名"),
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 5.h,
+              child: Obx(() {
+                return Text(
+                  appStateController.isLogin.value
+                      ? "${StringsConstant.rank.tr}：${appStateController
+                      .coinInfo.value.rank ?? "-"}"
+                      : "${StringsConstant.rank.tr}：-",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
                   ),
-                  child: Obx(() {
-                    return Text(
-                      appStateController.isLogin.value
-                          ? "${StringsConstant.rank.tr}：${appStateController.coinInfo.value.rank ?? "-"}"
-                          : "${StringsConstant.rank.tr}：-",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                      ),
-                    );
-                  }),
-                ),
-              ),
+                );
+              }),
             ),
           ),
-        );
+        ),
+      ),
+    );
   }
 
   Container userLevelContainer() {
     return Container(
-          alignment: Alignment.center,
-          child: Material(
-            color: Colors.transparent,
-            child: Ink(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.pinkAccent,
+      alignment: Alignment.center,
+      child: Material(
+        color: Colors.transparent,
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.pinkAccent,
+          ),
+          child: InkWell(
+            onTap: () => Fluttertoast.showToast(msg: "等级"),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+                vertical: 5.h,
               ),
-              child: InkWell(
-                onTap: () => Fluttertoast.showToast(msg: "等级"),
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 5.h,
+              child: Obx(() {
+                return Text(
+                  appStateController.isLogin.value
+                      ? "${StringsConstant.level.tr}：${appStateController
+                      .coinInfo.value.level ?? "-"}"
+                      : "${StringsConstant.level.tr}：-",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
                   ),
-                  child: Obx(() {
-                    return Text(
-                      appStateController.isLogin.value
-                          ? "${StringsConstant.level.tr}：${appStateController.coinInfo.value.level ?? "-"}"
-                          : "${StringsConstant.level.tr}：-",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                      ),
-                    );
-                  }),
-                ),
-              ),
+                );
+              }),
             ),
           ),
-        );
+        ),
+      ),
+    );
   }
 }

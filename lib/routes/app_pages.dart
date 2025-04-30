@@ -9,6 +9,10 @@ import 'package:flutter3_wan_android/page/navigation/navigation_binding.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_view.dart';
 import 'package:flutter3_wan_android/page/project/project_binding.dart';
 import 'package:flutter3_wan_android/page/project/project_view.dart';
+import 'package:flutter3_wan_android/page/setting/language/language_setting_page.dart';
+import 'package:flutter3_wan_android/page/setting/setting_binding.dart';
+import 'package:flutter3_wan_android/page/setting/setting_page.dart';
+import 'package:flutter3_wan_android/page/setting/theme/theme_setting_page.dart';
 import 'package:flutter3_wan_android/page/system/system_binding.dart';
 import 'package:flutter3_wan_android/page/system/system_view.dart';
 import 'package:flutter3_wan_android/page/system/tree_tab_content_page/tree_tab_content_page_binding.dart';
@@ -83,21 +87,19 @@ class AppPages {
       name: AppRoutes.loginRegisterPage,
       page: () => LoginRegisterPage(),
     ),
-
-    // GetPage(
-    //   name: AppRoutes.settingPage,
-    //   page: () => SettingPage(),
-    //   binding: SettingBinding(),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.themeModePage,
-    //   page: () => ThemeSettingPage(),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.languageModePage,
-    //   page: () => LanguagePage(),
-    //   // binding: LanguageBinding(),
-    // ),
+    GetPage(
+      name: AppRoutes.settingPage,
+      page: () => SettingPage(),
+      binding: SettingBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.themeModePage,
+      page: () => ThemeSettingPage(),
+    ),
+    GetPage(
+      name: AppRoutes.languageModePage,
+      page: () => LanguageSettingPage(),
+    ),
     // GetPage(
     //   name: AppRoutes.searchPage,
     //   page: () => SearchPage(),

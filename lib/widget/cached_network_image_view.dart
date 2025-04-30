@@ -84,7 +84,7 @@ class CachedNetworkImageView extends StatelessWidget {
                 borderRadius: borderRadius,
                 borderWidth: borderWidth,
                 borderColor: borderColor,
-                imageProvider: const AssetImage('images/ic_background.png'),
+                imageProvider: const AssetImage('images/icon_background.png'),
               ),
             );
           } else {

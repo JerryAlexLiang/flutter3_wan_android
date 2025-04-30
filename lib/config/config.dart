@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/http/dio_util.dart';
 import 'package:flutter3_wan_android/page/login/app_user_login_state_controller.dart';
+import 'package:flutter3_wan_android/page/setting/theme/theme_setting_controller.dart';
 import 'package:flutter3_wan_android/util/sp_util.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../theme/app_theme.dart';
 
 class Config {
   // 是否启用代理
@@ -47,6 +50,12 @@ class Config {
     // 初始化网络请求工具类
     Get.lazyPut(() => DioUtil());
 
+    // 主题设置逻辑
+    var themeSettingController =
+        Get.put<ThemeSettingController>(ThemeSettingController());
+
+    // Get.put<LanguageSettingController>(LanguageSettingController());
+
     // 用户状态
     Get.put<AppUserLoginStateController>(AppUserLoginStateController());
 
@@ -56,6 +65,23 @@ class Config {
       setLoginState(true);
     } else {
       setLoginState(false);
+    }
+
+    // 初始化默认主题
+    var themeData = SpUtil.getAppThemeData();
+    if (themeData == null) {
+      themeSettingController.setSystemThemeMode();
+    } else {
+      if (themeData == ThemeKey.lightTheme) {
+        //日间模式
+        themeSettingController.setLightThemeMode();
+      } else if (themeData == ThemeKey.darkTheme) {
+        //夜间模式
+        themeSettingController.setDarkThemeMode();
+      } else if (themeData == ThemeKey.systemTheme) {
+        //跟随系统模式
+        themeSettingController.setSystemThemeMode();
+      }
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter3_wan_android/page/login/login_register/login_register_pa
 import 'package:flutter3_wan_android/page/mine/mine_controller.dart';
 import 'package:flutter3_wan_android/res/gaps.dart';
 import 'package:flutter3_wan_android/res/strings.dart';
+import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/util/decoration_style.dart';
 import 'package:flutter3_wan_android/widget/ripple_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,9 +45,7 @@ class UserInfoImage extends GetView<MineController> {
             topLeft: Radius.circular(20),
             bottomLeft: Radius.circular(20),
           ),
-          // onTap: () => Get.toNamed(
-          // .settingPage),
-          onTap: () => showToast('设置', position: ToastPosition.bottom),
+          onTap: () => Get.toNamed(AppRoutes.settingPage),
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
@@ -124,7 +123,9 @@ class UserInfoImage extends GetView<MineController> {
           borderRadius: BorderRadius.circular(100),
           clipBehavior: Clip.antiAlias,
           child: Image.asset(
-            loginState ? 'images/ic_background.png' : 'images/launch_image.png',
+            loginState
+                ? 'images/icon_background.png'
+                : 'images/launch_image.png',
             fit: loginState ? BoxFit.cover : BoxFit.contain,
             width: 80,
             height: 80,

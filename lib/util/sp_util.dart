@@ -1,9 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter3_wan_android/constant/constant.dart';
+import 'package:flutter3_wan_android/model/language.dart';
 import 'package:flutter3_wan_android/model/user_info_model.dart';
+import 'package:flutter3_wan_android/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'locale_util.dart';
 
 class SpUtil {
   /// 保存用户信息
@@ -31,5 +36,38 @@ class SpUtil {
   /// 清除本地持久化的用户数据
   static void clearUserInfo() {
     Get.find<SharedPreferences>().remove(Constant.userInfoKey);
+  }
+
+  /// 存储设置的主题
+  static saveAppThemeData(String themeKey) {
+    Get.find<SharedPreferences>().setString(ThemeKey.appThemeKey, themeKey);
+  }
+
+  /// 获取存储的主题
+  static String? getAppThemeData() {
+    return Get.find<SharedPreferences>().getString(ThemeKey.appThemeKey);
+  }
+
+  /// 存储-更新语言格式
+  static saveUpdateLanguage(Language language) {
+    Get.find<SharedPreferences>()
+        .setString(LocaleUtil.appLanguageKey, jsonEncode(language.toJson()));
+  }
+
+  /// 获取存储的语言格式
+  static Language? getLanguage() {
+    try {
+      var languageJson =
+          Get.find<SharedPreferences>().getString(LocaleUtil.appLanguageKey);
+      if (languageJson == null) {
+        //如果没有存储语言设置，则默认是跟随系统
+        return null;
+      } else {
+        return Language.fromJson(jsonDecode(languageJson));
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 }

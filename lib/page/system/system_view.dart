@@ -87,10 +87,10 @@ class SystemPage extends StatelessWidget {
         horizontal: 10.w,
         vertical: 10.h,
       ),
-      decoration: const BoxDecoration(
-        // color: context.scaffoldBackgroundColor,
-        color: Colors.white,
-        border: Border(
+      decoration: BoxDecoration(
+        color: context.scaffoldBackgroundColor,
+        // color: Colors.white,
+        border: const Border(
           bottom: BorderSide(width: 0.1, color: Colors.grey),
         ),
       ),

@@ -34,4 +34,8 @@ class R {
   static const String iconSplashBg = 'images/icon_splash_bg.png';
   static const String iconLoginBg = 'images/icon_login_bg.jpg';
   static const String iconRegisterBg = 'images/icon_register_bg.jpeg';
+
+  static const String iconBackground = 'images/icon_background.png';
+  static const String iconBackground2 = 'images/icon_background2.png';
+  static const String iconBackground3 = 'images/icon_background3.png';
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter3_wan_android/page/home/home_page.dart';
 import 'package:flutter3_wan_android/page/home2/home2_page.dart';
 import 'package:flutter3_wan_android/page/mine/mine_view.dart';
 import 'package:flutter3_wan_android/page/navigation/navigation_view.dart';
@@ -12,7 +11,6 @@ import 'package:get/get.dart';
 
 class MainController extends GetxController {
   /// 底部BottomNavigationBarItem
-  late List<BottomNavigationBarItem> bottomTabs;
 
   /// 响应式成员变量，底部导航栏默认位置指引0
   final _currentPage = 0.obs;
@@ -50,8 +48,8 @@ class MainController extends GetxController {
     // PageView页面控制器
     pageController = PageController(initialPage: currentPage);
 
-    // 初始化底部导航Items
-    initBottomBarItems();
+    // // 初始化底部导航Items
+    // initBottomBarItems();
 
     // PageView Body
     initPageViewBodies();
@@ -92,8 +90,8 @@ class MainController extends GetxController {
   }
 
   // 初始化底部导航Items
-  void initBottomBarItems() {
-    bottomTabs = <BottomNavigationBarItem>[
+  List<BottomNavigationBarItem> initBottomBarItems() {
+    var bottomTabs = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         icon: const Icon(
           Icons.home_outlined,
@@ -154,6 +152,7 @@ class MainController extends GetxController {
         label: StringsConstant.minePage.tr,
       ),
     ];
+    return bottomTabs;
   }
 
   ///在 onInit() 之后调用 1 帧。这是进入的理想场所

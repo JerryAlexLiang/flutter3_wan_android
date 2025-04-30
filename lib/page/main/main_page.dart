@@ -76,7 +76,7 @@ class MainPage extends GetView<MainController> {
   Widget _buildBottomNavigatorBar() {
     return Obx(() {
       return BottomNavigationBar(
-        items: controller.bottomTabs,
+        items: controller.initBottomBarItems(),
         currentIndex: controller.currentPage,
         type: BottomNavigationBarType.fixed,
         selectedFontSize: 16.sp,
@@ -91,7 +91,7 @@ class MainPage extends GetView<MainController> {
   /// 内容页
   _buildPageView() {
     return PageView(
-      // // 禁止滑动
+      // 禁止滑动
       physics: const NeverScrollableScrollPhysics(),
       controller: controller.pageController,
       onPageChanged: (int index) => controller.onPageChanged(index),

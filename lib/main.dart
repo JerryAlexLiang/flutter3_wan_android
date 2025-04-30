@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter3_wan_android/config/config.dart';
 import 'package:flutter3_wan_android/http/base_page_list_response.dart';
+import 'package:flutter3_wan_android/res/strings.dart';
 import 'package:flutter3_wan_android/routes/app_pages.dart';
 import 'package:flutter3_wan_android/routes/app_routes.dart';
 import 'package:flutter3_wan_android/theme/app_theme.dart';
 import 'package:flutter3_wan_android/util/keyboard_util.dart';
+import 'package:flutter3_wan_android/util/locale_util.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
@@ -19,7 +22,7 @@ import 'package:window_size/window_size.dart';
 
 import 'model/user.dart';
 
-void main() async{
+void main() async {
   // 初始化
   await Config.init();
 
@@ -82,6 +85,33 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               darkTheme: darkTheme,
               themeMode: ThemeMode.light,
+
+              /// 国际化支持
+              //来源配置
+              translations: Messages(),
+              //默认语言
+              locale: LocaleUtil.getDefaultLocale(),
+              //备用语言
+              fallbackLocale: const Locale('en', 'US'),
+              // fallbackLocale: const Locale('zh', 'CN'),
+              localizationsDelegates: const [
+                // Refresh国际化 这行是关键
+                RefreshLocalizations.delegate,
+                // 解决TextFiled长按复制粘贴显示英文的问题
+                // 引入翻译相关
+                //   flutter_localizations:
+                //     sdk: flutter
+                GlobalWidgetsLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              //国际化支持的语言包
+              supportedLocales: const [
+                Locale('zh', "CN"),
+                Locale('en', 'US'),
+              ],
+
+              defaultTransition: Transition.fade,
               initialRoute: AppRoutes.splash,
               getPages: AppPages.routes,
             );
